@@ -1,16 +1,35 @@
 import {
     ArrowRightOutlined,
-    UserOutlined,
-    LockOutlined,
     MobileOutlined,
-    CodeOutlined,
-} from '@ant-design/icons'
-
+    UserOutlined,
+    CodeSandboxOutlined,
+    LockOutlined,
+    ApartmentOutlined,
+    AimOutlined,
+    InsertRowAboveOutlined,
+    SmileOutlined,
+    AccountBookOutlined,
+    DashboardOutlined,
+    LineChartOutlined,
+    TeamOutlined,
+    BarChartOutlined,
+    RetweetOutlined,
+} from '@ant-design/icons';
 
 export default {
-    arrowRight : <ArrowRightOutlined />,
+    arrowRight: <ArrowRightOutlined />,
     userIcon: <UserOutlined />,
-    passwordIcon: <LockOutlined />,
     mobileIcon: <MobileOutlined />,
-    codeIcon: <CodeOutlined />,
-}
+    smCodeIcon: <CodeSandboxOutlined />,
+    passwordIcon: <LockOutlined />,
+    department: <ApartmentOutlined />,
+    level: <AimOutlined />,
+    assessment: <InsertRowAboveOutlined />,
+    reward: <SmileOutlined />,
+    salary: <AccountBookOutlined />,
+    dashboard: <DashboardOutlined />,
+    attendance: <LineChartOutlined />,
+    team: <TeamOutlined />,
+    barChart: <BarChartOutlined />,
+    rewardAndPunishment: <RetweetOutlined />
+};

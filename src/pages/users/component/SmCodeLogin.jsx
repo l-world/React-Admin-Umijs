@@ -28,7 +28,7 @@ const SmCodeLogin = ({ FormItem, Input,form }) => {
         const mobile = form.getFieldValue('mobile');
         const res = await $http.getSmCode({ mobile });
         message.success(res.msg);
-        console.log(res,'sendSmCode=====');
+        // console.log(res,'sendSmCode=====');
         setDisabled(true);
         //倒计时
         runTime();

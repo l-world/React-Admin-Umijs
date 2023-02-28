@@ -1,5 +1,6 @@
 import $http from 'api';
-import {message} from 'antd'
+import {message} from 'antd';
+import {history} from 'umi';
 export default  {
     namespace: "user",
     state:{
@@ -16,15 +17,18 @@ export default  {
                 message.error(msg);
                 return;
             }   
+            // 缓存用户信息
+            sessionStorage.setItem( 'userProfile',  JSON.stringify(data));
             // 登录成功之后，请求路由表并缓存路由表
             const routeData = yield call( $http.getRouteList);
-            sessionStorage.setItem( 'userProfile',  JSON.stringify(data));
             sessionStorage.setItem( 'routeList', JSON.stringify(routeData.data));
             // 不太懂
             yield put({
                 type:'updateUserProfile',
                 payload:{userInfo: data}
             })
+            // 登录成功，进行页面跳转
+            history.push(routeData.data[0].route);
         }
     },
 }

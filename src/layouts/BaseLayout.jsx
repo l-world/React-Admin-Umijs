@@ -1,12 +1,18 @@
 import React from 'react'
+import { Layout,Menu } from 'antd';
+const { Header,Sider, Content } = Layout;
+import SideBar from 'components/SideBar';
+import './BaseLayout.less'
 
-const BaseLayout = ({children}) => {
+const BaseLayout = ({ children }) => {
     return (
-        <div>
-            <h1>头部</h1>
-            <section>侧边栏</section>
-            {children}
-        </div>
+        <Layout>
+           <SideBar Sider={Sider} Menu={Menu}/>
+            <Layout>
+                <Header >Header</Header>
+                <Content >{children}</Content>
+            </Layout>
+        </Layout>
     )
 }
 

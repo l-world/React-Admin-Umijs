@@ -1,9 +1,9 @@
 import React from 'react'
 
-const rewardRecord = () => {
+const rewardAndPunishment = () => {
   return (
     <div>奖惩记录</div>
   )
 }
 
-export default rewardRecord
+export default rewardAndPunishment
