@@ -13,7 +13,10 @@ import {
     LineChartOutlined,
     TeamOutlined,
     BarChartOutlined,
-    RetweetOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    DatabaseOutlined,
+    WalletOutlined
 } from '@ant-design/icons';
 
 export default {
@@ -30,6 +33,9 @@ export default {
     dashboard: <DashboardOutlined />,
     attendance: <LineChartOutlined />,
     team: <TeamOutlined />,
-    barChart: <BarChartOutlined />,
-    rewardAndPunishment: <RetweetOutlined />
+    leftArrow: <MenuFoldOutlined />,
+    rightArrow: <MenuUnfoldOutlined />,
+    rewardAndPunishment: <DatabaseOutlined />,
+    signOut: <WalletOutlined />,
+    'bar-chart': <BarChartOutlined />,
 };

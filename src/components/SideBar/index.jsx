@@ -3,16 +3,16 @@ import logo from 'common/imgs/logo.svg';
 import { history, Link} from 'umi';
 import iconMap from 'components/IconMap';
 
-const SideBar = ({Sider, Menu}) => {
+const SideBar = ({Sider, Menu, collapse}) => {
     const pathname = history.location.pathname;
     const routerList = sessionStorage.getItem('routeList') ? JSON.parse(sessionStorage.getItem('routeList')) : [];
   return (
-    <Sider theme='light' className="side-bar">
+    <Sider theme='light' className="side-bar" collapsed={ collapse }>
         <div className="brand">
             <div className="logo">
                 <img src={logo} alt="logo" />
-                <h1>人事管理系统</h1>
-            </div>
+                { !collapse && <h1>人事管理系统</h1> }
+             </div>
         </div>
         <div className="menu-container">
             <Menu mode="inline" selectedKeys={[pathname]}>
@@ -21,7 +21,7 @@ const SideBar = ({Sider, Menu}) => {
                         return (
                             <Menu.Item key={item.route}>
                                 <Link to={item.route}>
-                                    {iconMap[item.icon === 'bar-chart' ? 'barChart' : item.icon]}
+                                    {iconMap[item.icon]}
                                     <span>{item.zhName}</span>
                                 </Link>
                             </Menu.Item>

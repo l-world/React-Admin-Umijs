@@ -7,7 +7,7 @@ export default  {
         userInfo:sessionStorage.getItem('userProfile') ?  JSON.parse(sessionStorage.getItem('userProfile')) : null
     },
     reducers:{
-        updateUserProfile:( state, {payload} ) => ({...state, payload})
+        updateUserProfile:( state, {payload} ) => ({...state, ...payload})
     },
     effects:{
         *login({ payload }, { put, call, select }){
@@ -17,11 +17,11 @@ export default  {
                 message.error(msg);
                 return;
             }   
-            // 缓存用户信息
-            sessionStorage.setItem( 'userProfile',  JSON.stringify(data));
             // 登录成功之后，请求路由表并缓存路由表
             const routeData = yield call( $http.getRouteList);
             sessionStorage.setItem( 'routeList', JSON.stringify(routeData.data));
+            // 缓存用户信息
+            sessionStorage.setItem( 'userProfile',  JSON.stringify(data));
             // 不太懂
             yield put({
                 type:'updateUserProfile',
