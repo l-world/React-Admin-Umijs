@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'umi'
+import { Form, Input, Button, Row, Col } from 'antd'
 import AccountLogin from './component/AccountLogin'
 import SmCodeLogin from './component/SmCodeLogin'
-import { Form, Input, Button, Row, Col } from 'antd'
-const FormItem = Form.Item;
 import IconMap from 'components/IconMap';
 import LogoImg from 'common/imgs/logo.svg';
 import './css/login.less'
-import { useDispatch, useSelector } from 'umi'
+
+const FormItem = Form.Item;
+
 const login = ( { history } ) => {
 
     const [form] = Form.useForm();
