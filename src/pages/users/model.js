@@ -16,7 +16,10 @@ export default  {
                 message.error(msg);
                 return;
             }   
+            // 登录成功之后，请求路由表并缓存路由表
+            const routeData = yield call( $http.getRouteList);
             sessionStorage.setItem( 'userProfile',  JSON.stringify(data));
+            sessionStorage.setItem( 'routeList', JSON.stringify(routeData.data));
             // 不太懂
             yield put({
                 type:'updateUserProfile',
