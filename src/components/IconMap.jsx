@@ -3,7 +3,7 @@ import {
     UserOutlined,
     LockOutlined,
     MobileOutlined,
-    CodeOutlined
+    CodeOutlined,
 } from '@ant-design/icons'
 
 
@@ -12,5 +12,5 @@ export default {
     userIcon: <UserOutlined />,
     passwordIcon: <LockOutlined />,
     mobileIcon: <MobileOutlined />,
-    codeIcon: <CodeOutlined />
+    codeIcon: <CodeOutlined />,
 }
