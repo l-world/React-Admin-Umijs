@@ -6,7 +6,7 @@ export default {
     subscriptions:{
         setup({dispatch,history}){
              // 初始化查询用户是否登录，app.start阶段进行执行
-            dispatch({type:queryUserLogin,payload:{history}})
+            dispatch({type:'queryUserLogin',payload:{history}})
         }
     },
     effects:{
