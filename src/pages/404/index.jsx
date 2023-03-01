@@ -5,10 +5,10 @@ const notFount = () => {
     return (
         <div
             style={{
+                height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                height: '100%',
-                justifyContent: 'center'
+                justifyContent: 'center',
             }}
         >
             <img src={NotFoundImg} alt="not-fount-img" />

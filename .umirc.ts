@@ -5,6 +5,10 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  // 解决dva重复加载数据的问题
+  dynamicImport: {
+    loading: '@/components/Loading',
+  },
   alias:{
     utils:resolve(__dirname,'./src/utils'),
     components:resolve(__dirname,'./src/components'),
