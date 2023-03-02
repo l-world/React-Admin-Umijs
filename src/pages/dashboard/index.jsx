@@ -24,6 +24,11 @@ const Dashborad = () => {
 
             {/* 最老员工情况 */}
             <OldStaffTable { ...staffData } />
+
+            {/* 空心圆 */}
+            <Pie {...marriageData} /> 
+
+            <Pie {...constellationData} /> 
         </div>
     )
 }

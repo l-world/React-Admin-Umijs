@@ -9,7 +9,7 @@ const Pie = ({ title, renderList, styleData, showSider = false, isEmpty = false,
         series: {
             name: title,
             type: 'pie',
-            radius: isEmpty ? ['50%', '70%'] : '50%',
+            radius: isEmpty ? ['50%', '70%'] : '50%', // isEmpty为true,是空心圆
             center: ['55%', '55%'],
             data: renderList,
             roseType: isArea && 'area',

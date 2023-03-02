@@ -35,12 +35,16 @@ export default {
                     { title:"部门员工数量", renderList: data.departmentList, styleData:{ width: "49.8%",height:"350px"}},
                 ],
                 marriageData:{
-                    title:"员工婚姻状况", renderList: data.marriageList, styleData:{ width: "49.8%",height:"350px"}
+                    title:"员工婚姻状况", 
+                    renderList: data.marriageList, 
+                    styleData:{ width: "49.8%",height:"350px"},
+                    isEmpty:true,
                 },
                 constellationData: {
                     title: '员工星座分布',
                     renderList: data.constellationList,
                     styleData: { width: '49.8%', height: '350px' },
+                    isArea:true,
                 },
                 staffData: {
                     title: '工龄最老的10个人',
