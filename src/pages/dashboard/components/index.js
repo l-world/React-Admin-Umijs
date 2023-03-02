@@ -1,7 +1,13 @@
-import StaffAmount1 from "./StaffAmount";
-import OldStaffTable1 from "./OldStaffTable";
-import Pie1 from "./Pie";
+import StaffAmount from "./StaffAmount";
+import OldStaffTable from "./OldStaffTable";
+import Pie from "./Pie";
+import AgeColumn from "./AgeColumn";
 
-export const StaffAmount = StaffAmount1;
-export const OldStaffTable = OldStaffTable1;
-export const Pie = Pie1;
+const AllComp = {
+    StaffAmount,
+    OldStaffTable,
+    Pie,
+    AgeColumn
+}
+
+export default AllComp;
