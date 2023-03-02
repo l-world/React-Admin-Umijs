@@ -32,7 +32,7 @@ export default {
                 ],
                 columnList:[
                     { title:"员工年龄段", renderList: data.ageMap, styleData:{ width: "49.8%",height:"350px"}},
-                    { title:"部门员工数量", renderList: data.departmentList, styleData:{ width: "49.8%",height:"350px"}},
+                    { title:"部门员工数量", renderList: data.departmentList, styleData:{ width: "49.8%",height:"350px"}, br: true,},
                 ],
                 marriageData:{
                     title:"员工婚姻状况", 

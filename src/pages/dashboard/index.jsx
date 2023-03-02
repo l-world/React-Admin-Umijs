@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector,useDispatch } from 'umi';
 import './css/index.less'
 import AllComp from './components'
-const { StaffAmount, OldStaffTable, Pie, AgeColumn } = AllComp
+const { StaffAmount, OldStaffTable, Pie, AgeColumn, Histogram } = AllComp
 const Dashborad = () => {
     const { amountList,pieList,columnList,marriageData,constellationData,staffData } = useSelector(state => state.dashboard);
     const dispatch = useDispatch();
@@ -31,7 +31,10 @@ const Dashborad = () => {
             {/* 星座分析 */}
             <Pie {...constellationData} /> 
 
-            
+            { 
+                columnList.map( ( item, index) => <Histogram {...item} key={index} />)
+            }
+
         </div>
     )
 }
