@@ -11,7 +11,7 @@ const OldStaffTable = ({ title, renderList, styleData }) => {
                     <div className="staff-list-title">部门</div>
                 </div>
                 <div className="staff-item-container">
-                    {
+                    {   /* ?容错处理, 一开始是没有renderList的 */
                         renderList?.map((item, index) => {
                             return (
                                 <div className="staff-list-item" key={index}>

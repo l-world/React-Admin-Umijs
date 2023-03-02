@@ -28,7 +28,7 @@ export default {
                 ],
                 pieList:[
                     { title:"学历情况", renderList: data.educationList, styleData:{ width: "49.8%",height:"350px" }},
-                    { title:"员工性别占比", renderList: data.genderList, styleData:{ width: "49.8%",height:"350px" }},
+                    { title:"员工性别占比", renderList: data.genderList, styleData:{ width: "49.8%",height:"350px" }, showSider: true},
                 ],
                 columnList:[
                     { title:"员工年龄段", renderList: data.ageMap, styleData:{ width: "49.8%",height:"350px"}},
