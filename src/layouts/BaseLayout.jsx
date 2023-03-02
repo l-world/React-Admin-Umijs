@@ -1,16 +1,19 @@
 import React from 'react'
-import { history } from 'umi';
+import { history, useSelector } from 'umi';
 import { Layout, Menu } from 'antd';
 const { Header, Sider, Content } = Layout;
 import './BaseLayout.less'
 import SideBar from 'components/SideBar';
 import CommonHeader from '../components/CommonHeader';
-import NotFoundPage from '../pages/404'
+import NotFoundPage from '../pages/404';
+import Loading from 'components/Loading';
+
 const BaseLayout = ({ children }) => {
     // 折叠侧边连按钮的状态
     const [collapse, setCollapse] = React.useState(false);
     const { location } = history;
     const routeList = JSON.parse(sessionStorage.getItem('routeList'));
+    const loading = useSelector(state => state.loading);
     
     // 定义一个当前界面的判断函数，
     // 判断当前界面是不是根域下，直接跳转到路由对象的首页面，如果说当前访问的界面没有在路由表内部，直接跳转到404界面
@@ -30,7 +33,16 @@ const BaseLayout = ({ children }) => {
             <SideBar Sider={Sider} Menu={Menu} collapse={collapse} />
             <Layout>
                 <CommonHeader Header={Header} collapse={collapse} changeCollapse={changeCollapse} />
-                <Content>{isIncludesPage() ? children : <NotFoundPage />}</Content>
+                <Content className='main-content'>
+                    { 
+                        isIncludesPage() ? 
+                            <>
+                                <Loading part={true} isShow={ loading.effects['dashboard/initDashboardData'] } />
+                                {children}
+                            </> : 
+                            <NotFoundPage /> 
+                    }
+                </Content>
             </Layout>
         </Layout>
     )
