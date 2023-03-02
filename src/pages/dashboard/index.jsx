@@ -5,7 +5,8 @@ import StaffAmount from './components/StaffAmount';
 import OldStaffTable from './components/OldStaffTable';
 
 const Dashborad = () => {
-    const {amountList,oldStaffData } = useSelector(state => state.dashboard);
+    const { amountList,pieList,columnList,marriageData,constellationData,staffData } = useSelector(state => state.dashboard);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,10 +16,10 @@ const Dashborad = () => {
     return (
         <div className='dashboard-container'>
             {
-                amountList.map( (props,index) => <StaffAmount key={index} {...props} />)
+                amountList.map( (item,index) => <StaffAmount key={index} {...item} />)
             }
 
-            {/* <OldStaffTable {...oldStaffData} /> */}
+            <OldStaffTable { ...staffData } />
         </div>
     )
 }
