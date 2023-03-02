@@ -37,7 +37,7 @@ const BaseLayout = ({ children }) => {
                     { 
                         isIncludesPage() ? 
                             <>
-                                <Loading part={true} isShow={ loading.effects['dashboard/initDashboardData'] } />
+                                <Loading part={true} isShow={ loading.effects['dashboard/initDashboardData'] || loading.effects['attendance/initAttendanceTable'] } />
                                 {children}
                             </> : 
                             <NotFoundPage /> 
