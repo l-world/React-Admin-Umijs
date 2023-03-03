@@ -1,6 +1,8 @@
 import React, { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
+import FilterForm from './component/FilterForm';
 import TableHeader from 'components/TableHeader';
+import SearchContainer from 'components/SearchContainer'
 import './index.less';
 
 const staff = ({ }) => {
@@ -20,7 +22,7 @@ const staff = ({ }) => {
     }
 
     return (
-        <div className='main-container'>
+        <div className='main-content'>
             <TableHeader 
                 page={page}
                 total={staffTotal}
@@ -28,6 +30,8 @@ const staff = ({ }) => {
                 changePage={changePage}
                 interfaceDelMethod={'deleteStaffs'}
             />
+
+            <SearchContainer render={ () => <FilterForm /> } />
         </div>
     )
 }

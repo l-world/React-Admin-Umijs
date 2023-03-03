@@ -35,7 +35,7 @@ const BaseLayout = ({ children }) => {
         })
       };
     return (
-        <Layout>
+        <Layout className='container'>
             <SideBar Sider={Sider} Menu={Menu} collapse={collapse} />
             <Layout>
                 <CommonHeader Header={Header} collapse={collapse} changeCollapse={changeCollapse} />

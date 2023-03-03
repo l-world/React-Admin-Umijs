@@ -18,7 +18,10 @@ import {
     DatabaseOutlined,
     WalletOutlined,
     FileAddOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    ReloadOutlined,
+    CaretLeftOutlined,
+    CaretRightOutlined
 } from '@ant-design/icons';
 
 export default {
@@ -42,4 +45,7 @@ export default {
     'bar-chart': <BarChartOutlined />,
     add: <FileAddOutlined />,
     del: <DeleteOutlined />,
+    reload: <ReloadOutlined />,
+    left: <CaretLeftOutlined />,     
+    right: <CaretRightOutlined />,
 };
