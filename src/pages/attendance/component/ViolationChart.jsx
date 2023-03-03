@@ -1,9 +1,50 @@
-import React from 'react'
+import React from 'react';
+import ReactChart from 'echarts-for-react';
+import { formatDate } from 'utils/format'
 
-const ViolationChart = () => {
-  return (
-    <div>ViolationChart</div>
-  )
+const ViolationChart = ({ title, renderList }) => {
+    console.log(title, renderList);
+    const xData = renderList.xData.map(date => formatDate(date));
+    const option = {
+        title: { text: title },
+        tooltip: { trigger: 'axis' },
+        yAxis: [{ type: 'value', minInterval: 1 }], // minInterVal  展示整数
+        xAxis: [
+            {
+                type: 'category',
+                data: xData,
+            },
+        ],
+        // dataZoom:[
+        //     {
+        //         type:'slider',
+        //         show:true,
+        //         yAxisIndex:[0],
+        //         left:'9%',
+        //         bottom:0,
+        //         start:0,
+        //         end:60
+        //     }
+        // ],
+        serise: [
+            {
+                name: title + '人数',
+                type: 'bar',
+                data: renderList.yData,
+                label: {
+                    show: true,
+                    precision: 1,
+                    position: 'top',
+                    valueAnimation: true,
+                },
+            }
+        ]
+    }
+    return (
+        <div className='block-container'>
+            <ReactChart className='react_for_echarts' style={{ width: '100%', height: '400px' }} option={option} ></ReactChart>
+        </div>
+    )
 }
 
 export default ViolationChart
