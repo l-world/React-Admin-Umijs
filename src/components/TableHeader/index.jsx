@@ -7,10 +7,9 @@ import { useSelector } from 'umi';
 
 const TableHeader = ({ page, size, total, changePage, interfaceDelMethod }) => {
    
-    const { collapes } = useSelector( state => state.common);
-
+    const { collapse } = useSelector( state => state.common);
     return (
-        <div className={ classNames('table-header-container',{'big-style': collapes }) } >
+        <div className={ classNames('table-header-container',{'big-style': collapse }) } >
             <div>
                 <Button className='mr-10' size='small' shape='round' icon={IconMap.add} >创建</Button>
                 <Button danger size='small' shape='round' icon={IconMap.del}>批量删除</Button>

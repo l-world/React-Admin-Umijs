@@ -2,15 +2,14 @@
     position: fixed;
     left: 270px;
     top: 24px;
-    width: calc(100% - 470px);
+    min-width: calc(100% - 470px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.2s;
-
     &.big-style {
         left: 142px;
-        width: calc(100% - 270px);
+        min-width: calc(100% - 370px);
     }
 
     .pagination-container {

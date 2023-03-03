@@ -15,7 +15,6 @@ export default {
     effects: {
         *initStaffList({ payload }, { put, call }) {
             const { data: { staffList, staffTotal } } = yield call($http.getStaffList, payload);
-            console.log(staffList, staffTotal)
             yield put({ type: 'saveStaffList', payload: { staffList } });
             yield put({ type: 'saveStaffTotal', payload: { staffTotal } });
         }
