@@ -15,18 +15,18 @@ const ViolationChart = ({ title, renderList }) => {
                 data: xData,
             },
         ],
-        // dataZoom:[
-        //     {
-        //         type:'slider',
-        //         show:true,
-        //         yAxisIndex:[0],
-        //         left:'9%',
-        //         bottom:0,
-        //         start:0,
-        //         end:60
-        //     }
-        // ],
-        serise: [
+        dataZoom: [
+            {
+              type: 'slider',
+              show: true,
+              xAxisIndex: [0],
+              left: '9%',
+              bottom: 0,
+              start: 0,
+              end: 60,
+            },
+        ],
+        series: [
             {
                 name: title + '人数',
                 type: 'bar',
