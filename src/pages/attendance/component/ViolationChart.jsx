@@ -3,7 +3,7 @@ import ReactChart from 'echarts-for-react';
 import { formatDate } from 'utils/format'
 
 const ViolationChart = ({ title, renderList }) => {
-    console.log(title, renderList);
+   
     const xData = renderList.xData.map(date => formatDate(date));
     const option = {
         title: { text: title },
