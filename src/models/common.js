@@ -1,13 +1,18 @@
 import $http from 'api';
 export default {
     namespace: 'common',
-    state:{},
+    state:{
+        collapse:false,
+    },
     // 路由守卫，
     subscriptions:{
         setup({dispatch,history}){
              // 初始化查询用户是否登录，app.start阶段进行执行
             dispatch({type:'queryUserLogin',payload:{history}})
         }
+    },
+    reducers:{
+        changeCollapse:(state,{payload}) => ({ ...state, ...payload })
     },
     effects:{
         *queryUserLogin({payload},{put,call}){

@@ -7,7 +7,7 @@ const staff = ({ }) => {
     const [page, setPage] = useState(1)
     const dispatch = useDispatch();
     const { staffTotal } = useSelector( state => state.staff);
-
+    console.log(staffTotal);
     useEffect(() => {
         _initStaffList();
     }, [])

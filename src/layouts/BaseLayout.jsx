@@ -1,5 +1,5 @@
 import React from 'react'
-import { history, useSelector } from 'umi';
+import { history, useSelector, useDispatch } from 'umi';
 import { Layout, Menu } from 'antd';
 const { Header, Sider, Content } = Layout;
 import './BaseLayout.less'
@@ -10,10 +10,11 @@ import Loading from 'components/Loading';
 
 const BaseLayout = ({ children }) => {
     // 折叠侧边连按钮的状态
-    const [collapse, setCollapse] = React.useState(false);
+    const  { collapse } =  useSelector( state => state.common );
     const { location } = history;
     const routeList = JSON.parse(sessionStorage.getItem('routeList'));
     const loading = useSelector(state => state.loading);
+    const dispatch = useDispatch();
     
     // 定义一个当前界面的判断函数，
     // 判断当前界面是不是根域下，直接跳转到路由对象的首页面，如果说当前访问的界面没有在路由表内部，直接跳转到404界面
@@ -27,7 +28,12 @@ const BaseLayout = ({ children }) => {
     }
 
     //改变侧边栏的宽度展示
-    const changeCollapse = () => setCollapse(!collapse);
+    const changeCollapse = () =>  {
+        dispatch({
+          type:'common/changeCollapse',
+          payload:{collapse:!collapse}
+        })
+      };
     return (
         <Layout>
             <SideBar Sider={Sider} Menu={Menu} collapse={collapse} />
