@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'umi';
 import TableHeader from 'components/TableHeader';
 import SearchContainer from 'components/SearchContainer';
 import FilterForm from './component/FilterForm';
-import TableList from './component/TableList';
+// import TableList from './component/TableList';
 import './index.less';
 
 const staff = ({ }) => {
@@ -35,7 +35,7 @@ const staff = ({ }) => {
             />
 
             <SearchContainer render={ () => <FilterForm /> } />
-            <TableList loading={loading} userInfo={userInfo} staffList={staffList} />
+            {/* <TableList loading={loading} userInfo={userInfo} staffList={staffList} /> */}
         </div>
     )
 }

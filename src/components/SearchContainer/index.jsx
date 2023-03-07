@@ -16,7 +16,7 @@ const SearchContainer = ( { render } ) => {
                 <span>字段过滤</span>
                 <span className='c-r' onClick={ clearForm } >{IconMap.reload}</span>
             </div>
-            <div className={ classNames('filter-row-wrapper', { opacity: closeStatus }) }>
+            <div className={ classNames('filter-form-wrapper', { opacity: closeStatus }) }>
                 { render() }
             </div>
             <div className="close-tip" onClick={ () => setcloseStatus(!closeStatus) } >
