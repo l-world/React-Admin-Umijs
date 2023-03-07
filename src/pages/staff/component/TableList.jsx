@@ -4,7 +4,6 @@ import { EditableRow, EditableCell } from 'components/Editable';
 import Columns from './Columns';
 
 const TableList = ({ userInfo, staffList, loading }) => {
-
     const handleSave = (...args) => {
         console.log(args);
     }
@@ -22,8 +21,8 @@ const TableList = ({ userInfo, staffList, loading }) => {
             dataSource={staffList}
             pagination={false}
             rowKey={(record) => record._id}
-            loading={loading.effects['staff/_initStaffList']}
-            columns={Columns(userInfo, handleSave)}
+            loading={loading.effects['staff/initStaffList']}
+            columns={Columns({ userInfo, handleSave })}
         />
     )
 }

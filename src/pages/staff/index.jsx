@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'umi';
 import TableHeader from 'components/TableHeader';
 import SearchContainer from 'components/SearchContainer';
 import FilterForm from './component/FilterForm';
-// import TableList from './component/TableList';
+import TableList from './component/TableList';
 import './index.less';
 
 const staff = ({ }) => {
@@ -11,7 +11,7 @@ const staff = ({ }) => {
     const dispatch = useDispatch();
     const { staffTotal,staffList } = useSelector( state => state.staff);
     const {  userInfo } = useSelector( state => state.user);
-    const { loading } = useSelector( state => state.common);
+    const { loading } = useSelector( state => state);
     
     useEffect(() => {
         _initStaffList();
@@ -35,7 +35,7 @@ const staff = ({ }) => {
             />
 
             <SearchContainer render={ () => <FilterForm /> } />
-            {/* <TableList loading={loading} userInfo={userInfo} staffList={staffList} /> */}
+            <TableList  userInfo={userInfo} staffList={staffList} loading={loading} />
         </div>
     )
 }

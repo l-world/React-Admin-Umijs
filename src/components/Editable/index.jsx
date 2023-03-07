@@ -1,21 +1,21 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form, Input } from 'antd';
-
 const EditableContext = React.createContext(null);
+
 
 // 可编辑行, 将每一行进行拦截，给每个cell添加一个input框，
 export const EditableRow = ({ index, ...props }) => {
-    const [ Form ] = Form.userForm();
+    const [ form ] = Form.useForm();
     return (
         <Form form={form} component={false} >
-            <Editable.Provider value={form} >
+            <EditableContext.Provider value={form} >
                 <tr {...props} ></tr>
-            </Editable.Provider>
+            </EditableContext.Provider>
         </Form>
     )
 }
 
-export const Editable = ({ title, editable, children, dataIndex,record, handleSave,...resProps }) => {
+export const EditableCell = ({ title, editable, children, dataIndex,record, handleSave, ...restProps }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);

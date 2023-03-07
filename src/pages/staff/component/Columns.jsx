@@ -1,18 +1,20 @@
 import { Tag } from 'antd';
 import { formatYear, formatDate } from 'utils/format';
 
-const Columns = ({ handleSave, userInfo }) => {
+const Columns = ({userInfo, handleSave }) => {
+
     const normalList = [
         {
             title:"姓名",
             dataIndex:'userName',
-            width:'200px',
+            // width:'200px',
             editable: true,
+            render: ( userName ) => userName ? userName : "---"
         },
         {
             title:"联系电话",
             dataIndex:'mobile',
-            width:'200px',
+            // width:'200px',
             editable: true,
         },
         {
@@ -23,7 +25,7 @@ const Columns = ({ handleSave, userInfo }) => {
         {
             title:"性别",
             dataIndex:'gende',
-            width:'200px',
+            // width:'200px',
             editable: true,
         },
         {
@@ -39,19 +41,19 @@ const Columns = ({ handleSave, userInfo }) => {
         {
             title:"年龄",
             dataIndex:'idNumber',
-            width:'200px',
+            // width:'200px',
             editable: true,
-            render: ( idNumber ) => formatYear(idNumber, 'age')
+            render: ( idNumber ) => idNumber ?  formatYear( idNumber, 'age') : '---'
         },
     ]
-
+    // 权限 
     const authList = [
         {
             title:"入职时间",
-            dataIndex:'onboardTime',
-            width:'200px',
+            dataIndex:'onboardingTime',
+            // width:'200px',
             editable: true,
-            render : ( date ) => formatDate(date, 'YYYY-MM-DD')
+            render : ( date ) => date ?  formatDate(date, 'YYYY-MM-DD') : '---'
         },
     ]
 
