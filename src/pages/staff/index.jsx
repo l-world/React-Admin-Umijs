@@ -4,7 +4,6 @@ import TableHeader from 'components/TableHeader';
 import SearchContainer from 'components/SearchContainer';
 import FilterForm from './component/FilterForm';
 import TableList from './component/TableList';
-import './index.less';
 
 const staff = ({ }) => {
     const [page, setPage] = useState(1)
