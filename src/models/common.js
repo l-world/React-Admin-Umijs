@@ -12,6 +12,7 @@ export default {
         }
     },
     reducers:{
+        // 改变菜单折叠状态
         changeCollapse:(state,{payload}) => ({ ...state, ...payload })
     },
     effects:{

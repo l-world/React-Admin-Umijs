@@ -1,20 +1,23 @@
 import React, { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
-import FilterForm from './component/FilterForm';
 import TableHeader from 'components/TableHeader';
-import SearchContainer from 'components/SearchContainer'
+import SearchContainer from 'components/SearchContainer';
+import FilterForm from './component/FilterForm';
+import TableList from './component/TableList';
 import './index.less';
 
 const staff = ({ }) => {
     const [page, setPage] = useState(1)
     const dispatch = useDispatch();
-    const { staffTotal } = useSelector( state => state.staff);
+    const { staffTotal,staffList } = useSelector( state => state.staff);
+    const {  userInfo } = useSelector( state => state.user);
+    const { loading } = useSelector( state => state.common);
     
     useEffect(() => {
         _initStaffList();
     }, [])
 
-    const _initStaffList = (page) => dispatch({ type: 'staff/initStaffList', payload: { size: 10, page } })
+    const _initStaffList = (page) => dispatch({ type: 'staff/initStaffList', payload: { size: 10, page} })
 
     const changePage = (page) => {
         setPage(page);
@@ -32,6 +35,7 @@ const staff = ({ }) => {
             />
 
             <SearchContainer render={ () => <FilterForm /> } />
+            <TableList loading={loading} userInfo={userInfo} staffList={staffList} />
         </div>
     )
 }
