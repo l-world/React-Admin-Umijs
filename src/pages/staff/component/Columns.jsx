@@ -2,6 +2,7 @@ import { Tag, Image } from 'antd';
 import { formatYear, formatDate, formatBirth } from 'utils/format';
 import loadErrorImg from 'common/imgs/load_error.png';
 import { mapData } from 'utils/mapData';
+import { staffRule } from 'utils/rules'
 
 const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
     // 普通员工展示的表格字段
@@ -186,14 +187,32 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
         // 当前可编辑的单元格
         return {
             ...col,
-            onCell: record => ({
-                // record 表示整行的信息
-                record,
-                editable: col.editable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave: handleSave,
-            })
+            onCell: record => {
+                let type = '';
+                switch (col.dataIndex) {
+                    case 'onboardingTime':
+                        type = 'dateNode';
+                        break;
+                    case 'gender':
+                    case 'education':
+                    case 'marriage':
+                        type = 'selectNode';
+                        break;
+                    default:
+                        type = 'inputNode';
+                        break;
+                }
+                return {
+                    // record 表示整行的信息
+                    record,
+                    type,
+                    editable: col.editable,
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    rules:staffRule[col.dataIndex],
+                    handleSave: handleSave,
+                }
+            }
         }
     }
     )

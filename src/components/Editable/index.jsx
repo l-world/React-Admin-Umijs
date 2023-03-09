@@ -1,5 +1,8 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Select, DatePicker } from 'antd';
+const { Option } = Select;
+import moment from 'moment';
+import { mapData } from 'utils/mapData'
 
 const EditableContext = React.createContext(null);
 
@@ -23,21 +26,26 @@ export const EditableCell = ({
     dataIndex,
     record,
     handleSave,
+    rules,
+    type,
     ...restProps
 }) => {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);
+
     useEffect(() => {
         if (editing) {
-            inputRef.current.focus();
+           inputRef.current && inputRef.current.focus();
         }
     }, [editing]);
 
+    // 单元格点击的时候进行内容渲染
     const toggleEdit = () => {
         setEditing(!editing);
         form.setFieldsValue({
             [dataIndex]: record[dataIndex],
+            onboardingTime: moment(record.onboardingTime)
         });
     };
 
@@ -51,23 +59,50 @@ export const EditableCell = ({
         }
     };
 
+    // 修改之前的检测
+    const _sendBeforCheck = async () => {
+        try {
+            const editData = await form.validateFields([dataIndex]);
+            setEditing(!editing);
+            if( record[dataIndex] === editData[dataIndex] ) return ;
+            handleSave( {
+                _id:record._id,
+                updateVal:editData[dataIndex],
+                type:dataIndex
+            } )
+        } catch (error) {
+            setEditing(!editing);
+        }
+    }
+
+    const editNodeData = {
+        inputNode: ( <Input ref={inputRef} onPressEnter={ _sendBeforCheck} onBlur={_sendBeforCheck} /> ),
+        selectNode:(
+            <Select ref={inputRef} onBlur={_sendBeforCheck} >
+                {
+                    mapData[dataIndex] && mapData[dataIndex].map( (item,index) => {
+                        return (
+                            <Option key={index} value={index} >{item}</Option>
+                        )
+                    } )
+                }
+            </Select>
+        ),
+        dateNode:(
+            <DatePicker
+                ref={inputRef}
+                onBlur={ _sendBeforCheck}
+                onChange={ _sendBeforCheck}
+            />
+        )
+    }
+
     let childNode = children;
 
     if (editable) {
         childNode = editing ? (
-            <Form.Item
-                style={{
-                    margin: 0,
-                }}
-                name={dataIndex}
-                rules={[
-                    {
-                        required: true,
-                        message: `${title} is required.`,
-                    },
-                ]}
-            >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+            <Form.Item name={dataIndex} rules={rules} >
+                { editNodeData[type] }
             </Form.Item>
         ) : (
             <div

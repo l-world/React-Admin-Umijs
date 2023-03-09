@@ -7,5 +7,3 @@ requireApi.keys().forEach( key => {
     Object.assign(module, requireApi(key));
 } );
 export default module;
-
-// Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body

@@ -36,11 +36,11 @@ class Http {
         return Http.staticFetch(url, options);
     }
 
-    put(url,params = {},option = {} ){
-        const options = Object.assign({methods:"PUT"}, option);
+    put(url, params = {}, option = {}) {
+        const options = Object.assign({ method: 'PUT' }, option);
         options.body = JSON.stringify(params);
         return Http.staticFetch(url, options);
-    }
+      }
 
     get(url, option = {}) {
         const options = Object.assign({ method: 'GET' }, option);

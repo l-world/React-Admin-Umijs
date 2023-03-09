@@ -33,7 +33,11 @@ const staff = () => {
                 interfaceDelMethod={'deleteStaffs'}
             />
             <SearchContainer render={() => <FilterForm />} />
-            <TableList userInfo={userInfo} staffList={staffList} loading={loading} />
+            <TableList 
+                userInfo={userInfo} 
+                staffList={staffList} 
+                loading={loading} 
+                reloadPage={_initStaffList} />
         </div>
     )
 }
