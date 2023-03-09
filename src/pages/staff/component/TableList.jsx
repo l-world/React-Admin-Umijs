@@ -14,7 +14,7 @@ const TableList = ({ userInfo, staffList, loading }) => {
         console.log(args);
     }
 
-    const openViewRecord = (record) => {
+    const openReviewRecord = (record) => {
         setCurrentRecord(record);
         setDialogStatus(true)
     }
@@ -34,7 +34,7 @@ const TableList = ({ userInfo, staffList, loading }) => {
                 pagination={false}
                 rowKey={(record) => record._id}
                 loading={loading.effects['staff/initStaffList']}
-                columns={Columns({ userInfo, handleSave,openViewRecord })}
+                columns={Columns({ userInfo, handleSave,openReviewRecord })}
             />
 
             <Dialog

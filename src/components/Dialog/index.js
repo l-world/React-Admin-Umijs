@@ -9,7 +9,7 @@ const Dialog = ({ title, dialogStatus, render, setDialogStatus, width = 600 }) =
             centered={ true }
             title={ title }
             visible={ dialogStatus }
-            onCancel={ () => setDialogStatus }
+            onCancel={ () => setDialogStatus(false) }
             footer={ null }
         >
             { render() }

@@ -111,7 +111,7 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
                         onClick={ () =>
                             openReviewRecord({
                                 title:"考核记录",
-                                interface:'getAssessmentList',
+                                interfaceName:'getAssessmentList',
                                 requestData:{
                                     queryData:{ staffName:data._id }
                                 },
