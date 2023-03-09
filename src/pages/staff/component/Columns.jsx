@@ -26,9 +26,9 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
         },
         {
             title: "性别",
-            dataIndex: 'gende',
-            // width:'200px',
+            dataIndex: 'gender',
             editable: true,
+            render: (type) => <Tag>{mapData.gender[type]}</Tag>,
         },
         {
             title: "部门",
@@ -181,10 +181,13 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
     let renderColumnsList = userInfo.identity === 0 ? normalList : [...normalList, ...authList];
 
     renderColumnsList = renderColumnsList.map(col => {
+        // 当前不可编辑的单元格
         if (!col.editable) return col;
+        // 当前可编辑的单元格
         return {
             ...col,
             onCell: record => ({
+                // record 表示整行的信息
                 record,
                 editable: col.editable,
                 dataIndex: col.dataIndex,
