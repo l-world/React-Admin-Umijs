@@ -1,5 +1,7 @@
-import { Tag } from 'antd';
-import { formatYear, formatDate } from 'utils/format';
+import { Tag,Image } from 'antd';
+import { formatYear, formatDate,formatBirth  } from 'utils/format';
+import loadErrorImg from 'common/imgs/load_error.png';
+import { mapData } from 'utils/mapData';
 
 const Columns = ({userInfo, handleSave }) => {
 
@@ -38,13 +40,6 @@ const Columns = ({userInfo, handleSave }) => {
             dataIndex:'department',
             render: ( data ) => data?.departmentLeader?.userName || "---"
         },        
-        {
-            title:"年龄",
-            dataIndex:'idNumber',
-            // width:'200px',
-            editable: true,
-            render: ( idNumber ) => idNumber ?  formatYear( idNumber, 'age') : '---'
-        },
     ]
     // 权限 
     const authList = [
@@ -55,6 +50,58 @@ const Columns = ({userInfo, handleSave }) => {
             editable: true,
             render : ( date ) => date ?  formatDate(date, 'YYYY-MM-DD') : '---'
         },
+        {
+            title:"年龄",
+            dataIndex:'idNumber',
+            width:'100px',
+            editable: true,
+            render: ( idNumber ) => idNumber ?  formatYear( idNumber, 'age') : '---'
+        },
+        {
+            title:"头像",
+            dataIndex:'avatar',
+            // width:'200px',
+            render : (img) => <Image src={img} fallback={ loadErrorImg } /> 
+        },
+        {
+            title: '籍贯',
+            editable: true,
+            dataIndex: 'hometown',
+            render: (hometown) => hometown || '---',
+          },
+          {
+            title: '学历',
+            editable: true,
+            dataIndex: 'education',
+            render: (type) => <Tag> {mapData['education'][type]}</Tag>,
+          },
+          {
+            title: '婚姻状况',
+            editable: true,
+            dataIndex: 'marriage',
+            render: (type) => <Tag> {mapData['marriage'][type]}</Tag>,
+          },
+          {
+            title: '生日',
+            dataIndex: 'idNumber',
+            render: (id) => formatBirth(id),
+          },
+          {
+            title: '银行卡',
+            dataIndex: 'bankNumber',
+            editable: true,
+          },
+          {
+            title: '身份证号',
+            editable: true,
+            dataIndex: 'idNumber',
+          },
+          {
+            title: '毕业院校',
+            editable: true,
+            dataIndex: 'graduatedSchool',
+          },
+        
     ]
 
     let renderColumnsList = userInfo.identity === 0 ? normalList : [...normalList, ...authList];
