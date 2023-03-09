@@ -4,7 +4,7 @@ import loadErrorImg from 'common/imgs/load_error.png';
 import { mapData } from 'utils/mapData';
 
 const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
-
+    // 普通员工展示的表格字段
     const normalList = [
         {
             title: "姓名",
@@ -41,7 +41,7 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
             render: (data) => data?.departmentLeader?.userName || "---"
         },
     ]
-    // 权限 
+    // 管理员展示的表格字段
     const authList = [
         {
             title: "入职时间",
@@ -108,17 +108,19 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
                 console.log(record, data);
                 return (
                     <Tag 
-                        onClick={ () =>
-                            openReviewRecord({
-                                title:"考核记录",
-                                interfaceName:'getAssessmentList',
-                                requestData:{
-                                    queryData:{ staffName:data._id }
-                                },
-                                type: 'assessment'
-                            })
-                        }
                         className='c-p'
+                        onClick={ () =>
+                            openReviewRecord(
+                                {
+                                    title:"考核记录",
+                                    interfaceName:'getAssessmentList',
+                                    requestData:{
+                                        queryData:{ staffName:data._id }
+                                    },
+                                    type: 'assessment'
+                                }
+                            )
+                        }
                     >
                         查看
                     </Tag>
@@ -127,6 +129,7 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
         }
     ]
 
+    // identity: 0 表示普通员工， 1： 表示管理员
     let renderColumnsList = userInfo.identity === 0 ? normalList : [...normalList, ...authList];
 
     renderColumnsList = renderColumnsList.map(col => {
