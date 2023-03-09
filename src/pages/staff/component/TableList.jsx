@@ -15,6 +15,7 @@ const TableList = ({ userInfo, staffList, loading }) => {
     }
 
     const openReviewRecord = ( record ) => {
+        // record 是 Columns组件传递过来的值
         setCurrentRecord(record);
         setDialogStatus(true)
     }
@@ -34,7 +35,7 @@ const TableList = ({ userInfo, staffList, loading }) => {
                 pagination={false}
                 rowKey={(record) => record._id}
                 loading={loading.effects['staff/initStaffList']}
-                columns={ Columns({ userInfo, handleSave,openReviewRecord }) }
+                columns={ Columns({ userInfo, handleSave, openReviewRecord }) }
             />
 
             <Dialog

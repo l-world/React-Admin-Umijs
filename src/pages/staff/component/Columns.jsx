@@ -105,7 +105,6 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
             title: '绩效考核',
             dataIndex:'record',
             render: ( record, data) => {
-                console.log(record, data);
                 return (
                     <Tag 
                         className='c-p'

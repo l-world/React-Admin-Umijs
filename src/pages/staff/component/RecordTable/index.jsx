@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import $http from 'api';
 import { columnData } from './renderType';
 
-const RecordTable = ( { type, interfaceName, requesData } ) => {
+const RecordTable = ( { type, interfaceName, requestData } ) => {
     const [source, setSource] = useState([]);
     const [total, setTotal] = useState(0);
 
@@ -12,9 +12,10 @@ const RecordTable = ( { type, interfaceName, requesData } ) => {
     }, [])
     
     const _initData = async ( page = 1 ) => {
-        const res = await $http[interfaceName]({...requesData,page});
-        setSource( res.data.list);
-        setTotal( res.data.total);
+        const res = await $http[interfaceName]({ ...requestData, page });
+        const {list, total} = res.data
+        setSource(list);
+        setTotal( total);
     }
 
     const changePage = ( page ) => {
