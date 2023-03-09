@@ -39,7 +39,7 @@ export const columnData = {
             render: (data) => {
                 return(
                     <Tag color={ data > 2 ? "#f50" : "#108ee9" }>   
-                        {mapData.rewardType[ImageData]}
+                        {mapData.rewardType[data]}
                     </Tag>
                 )
             }
