@@ -101,6 +101,7 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
             editable: true,
             dataIndex: 'graduatedSchool',
         },
+        // 绩效考核
         {
             title: '绩效考核',
             dataIndex:'record',
@@ -117,6 +118,54 @@ const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
                                         queryData:{ staffName:data._id }
                                     },
                                     type: 'assessment'
+                                }
+                            )
+                        }
+                    >
+                        查看
+                    </Tag>
+                )
+            }
+        },
+        // 奖惩记录
+        {
+            title: '奖惩记录',
+            dataIndex:'record',
+            render: ( record, data) => {
+                return (
+                    <Tag 
+                        className='c-p'
+                        onClick={ () =>
+                            openReviewRecord(
+                                {
+                                    title:"奖惩记录",
+                                    interfaceName:'getRewardAndPunishment',
+                                    requestData: { staffName: data._id},
+                                    type: 'reward',
+                                }
+                            )
+                        }
+                    >
+                        查看
+                    </Tag>
+                )
+            }
+        },
+        // 调薪记录
+        {
+            title: '调薪记录',
+            dataIndex:'record',
+            render: ( record, data) => {
+                return (
+                    <Tag 
+                        className='c-p'
+                        onClick={ () =>
+                            openReviewRecord(
+                                {
+                                    title:"调薪记录",
+                                    interfaceName:'getSalaryAdjustment',
+                                    requestData:{ staffName:data._id },
+                                    type: 'salary'
                                 }
                             )
                         }
