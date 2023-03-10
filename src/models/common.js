@@ -32,7 +32,7 @@ export default {
                     const res = yield call($http.queryUserLogin);
                     if(res.code !== 0) return;
                     const {data : routeList} = yield call($http.getRouteList);
-                    sessionStorage.setItem('routeList', JSON.stringify(routeList));
+                    sessionStorage.setItem('routeList', JSON.stringify(routeList || []));
                 }
             }else {
                 // 不需要登录，清楚缓存

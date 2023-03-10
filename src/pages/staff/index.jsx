@@ -5,10 +5,12 @@ import SearchContainer from 'components/SearchContainer';
 import FilterForm from './component/FilterForm';
 import TableList from './component/TableList';
 import DrawerComponent from 'components/Drawer';
-import DetailForm from './component/DetailForm'
+import DetailForm from './component/DetailForm';
+import useCommon from 'hook/useCommon';
 
 const staff = () => {
-    const [page, setPage] = useState(1)
+    // const [page, setPage] = useState(1)
+    const [page, setPage] = useCommon();
     const dispatch = useDispatch();
     const { staffTotal, staffList, staffDetail } = useSelector(state => state.staff);
     const { userInfo } = useSelector(state => state.user);
@@ -18,17 +20,17 @@ const staff = () => {
         _initStaffList();
     }, [])
 
-    const _initStaffList = (page) => dispatch({ type: 'staff/initStaffList', payload: { size: 10, page } })
+    const _initStaffList = () => dispatch({ type: 'staff/_initStaffList', payload: { size: 10,page: page.current } })
 
-    const changePage = (page) => {
-        setPage(page);
+    const changePage = (currentPage) => {
+        setPage(currentPage);
         _initStaffList(page);
     }
 
     return (
         <div className='main-content'>
             <TableHeader
-                page={page}
+                page={page.current}
                 total={staffTotal}
                 size={10}
                 changePage={changePage}

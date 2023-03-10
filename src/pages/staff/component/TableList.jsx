@@ -55,7 +55,7 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
                 dataSource={staffList}
                 pagination={false}
                 rowKey={(record) => record._id}
-                loading={loading.effects['staff/initStaffList']}
+                loading={loading.effects['staff/_initStaffList']}
                 columns={ Columns({ userInfo, handleSave, openReviewRecord,openDetailDialog }) }
             />
 

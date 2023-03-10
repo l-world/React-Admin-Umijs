@@ -13,7 +13,7 @@ export default {
         saveStaffDetail: (state, { payload }) => ({ ...state, ...payload }),
     },
     effects: {
-        *initStaffList({ payload }, { put, call }) {
+        *_initStaffList({ payload }, { put, call }) {
             const { data: { staffList, staffTotal } } = yield call($http.getStaffList, payload);
             yield put({ type: 'saveStaffList', payload: { staffList } });
             yield put({ type: 'saveStaffTotal', payload: { staffTotal } });
