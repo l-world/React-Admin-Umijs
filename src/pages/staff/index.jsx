@@ -4,11 +4,13 @@ import TableHeader from 'components/TableHeader';
 import SearchContainer from 'components/SearchContainer';
 import FilterForm from './component/FilterForm';
 import TableList from './component/TableList';
+import DrawerComponent from 'components/Drawer';
+import DetailForm from './component/DetailForm'
 
 const staff = () => {
     const [page, setPage] = useState(1)
     const dispatch = useDispatch();
-    const { staffTotal, staffList } = useSelector(state => state.staff);
+    const { staffTotal, staffList, staffDetail } = useSelector(state => state.staff);
     const { userInfo } = useSelector(state => state.user);
     const { loading } = useSelector(state => state);
 
@@ -38,6 +40,13 @@ const staff = () => {
                 staffList={staffList} 
                 loading={loading} 
                 reloadPage={_initStaffList} />
+            <DrawerComponent 
+                title={ staffDetail?.userName}
+                _id={ staffDetail?._id}
+                interfaceName={'deleteStaffs'}
+                reloadList={ () => setPage(1) && _initStaffList()  }
+                render={  () => <DetailForm /> }
+            />
         </div>
     )
 }
