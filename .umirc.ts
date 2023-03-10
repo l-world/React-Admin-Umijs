@@ -14,6 +14,7 @@ export default defineConfig({
     components:resolve(__dirname,'./src/components'),
     common:resolve(__dirname,'./src/common'),
     api: resolve(__dirname,'./src/servicer'),
+    hook:resolve(__dirname,'./src/hook'),
   },
 //   routes: [
 //     { path: '/', component: '@/pages/index' },
