@@ -2,17 +2,32 @@ import { Tag, Image } from 'antd';
 import { formatYear, formatDate, formatBirth } from 'utils/format';
 import loadErrorImg from 'common/imgs/load_error.png';
 import { mapData } from 'utils/mapData';
-import { staffRule } from 'utils/rules'
+import { staffRule } from 'utils/rules';
+import IconMap from 'components/IconMap';
 
-const Columns = ({ userInfo, handleSave,openReviewRecord }) => {
+const Columns = ({ userInfo, handleSave,openReviewRecord, openDetailDialog }) => {
     // 普通员工展示的表格字段
     const normalList = [
         {
             title: "姓名",
             dataIndex: 'userName',
-            // width:'200px',
             editable: true,
-            render: (userName) => userName ? userName : "---"
+            render: (userName, { _id }) => {
+                return (
+                    <>
+                        <span className='user-name' >{userName}</span>
+                        <span 
+                            className='c-r'
+                            onClick={ (e) =>{
+                                e.stopPropagation();
+                                openDetailDialog(_id);
+                            }} 
+                        >
+                            {IconMap.detail}
+                        </span>
+                    </>
+                )
+            }
         },
         {
             title: "联系电话",

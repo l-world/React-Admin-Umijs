@@ -5,7 +5,7 @@ import ajax from '../http.js';
 export const getStaffList = (params) => ajax.post('/getStaff', params);
 
 //- 获取员工详情
-export const getStaffDetail = ({ _id }) => ajax.get(`/staffDetail/${_id}`);
+export const getStaffDetail = ({ id }) => ajax.get(`/staffDetail/${id}`);
 
 //- 新增员工=员工注册
 export const createStaff = (params) => ajax.post('/createStaff', params);

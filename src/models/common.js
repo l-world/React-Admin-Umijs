@@ -3,6 +3,7 @@ export default {
     namespace: 'common',
     state:{
         collapse:false,
+        isShowDetailDialog:false,
     },
     // 路由守卫，
     subscriptions:{
@@ -13,7 +14,8 @@ export default {
     },
     reducers:{
         // 改变菜单折叠状态
-        changeCollapse:(state,{payload}) => ({ ...state, ...payload })
+        changeCollapse:(state,{payload}) => ({ ...state, ...payload }),
+        setShowDetailDialog: (state, { payload }) => ({ ...state, ...payload }),
     },
     effects:{
         *queryUserLogin({payload},{put,call}){

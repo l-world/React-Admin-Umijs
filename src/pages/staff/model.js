@@ -17,6 +17,12 @@ export default {
             const { data: { staffList, staffTotal } } = yield call($http.getStaffList, payload);
             yield put({ type: 'saveStaffList', payload: { staffList } });
             yield put({ type: 'saveStaffTotal', payload: { staffTotal } });
+        },
+        *_getStaffDetail( { payload }, {put, call}){
+            console.log( payload,'models========')
+            const { data, msg} = yield call($http.getStaffDetail, payload);
+            yield put( { type: 'saveStaffDetail', payload: { staffDetail:data } });
+            yield put( { type: 'common/setShowDetailDialog', payload: { isShowDetailDialog:true}});
         }
     }
 }

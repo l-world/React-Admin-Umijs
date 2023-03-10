@@ -21,7 +21,8 @@ import {
     DeleteOutlined,
     ReloadOutlined,
     CaretLeftOutlined,
-    CaretRightOutlined
+    CaretRightOutlined,
+    FormOutlined
 } from '@ant-design/icons';
 
 export default {
@@ -48,4 +49,5 @@ export default {
     reload: <ReloadOutlined />,
     left: <CaretLeftOutlined />,     
     right: <CaretRightOutlined />,
+    detail: <FormOutlined />,
 };

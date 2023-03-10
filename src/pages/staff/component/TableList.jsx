@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'umi';
 import { Table, message } from 'antd';
 import Columns from './Columns';
 import { EditableRow, EditableCell } from 'components/Editable';
@@ -10,6 +11,7 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
 
     const [currentRecord, setCurrentRecord] = useState(null);
     const [dialogStatus, setDialogStatus] = useState(false);
+    const dispatch = useDispatch();
 
     const handleSave = async (args) => {
         // 在保存手机号之前 检测手机号是否存在
@@ -27,10 +29,16 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
         // 网络请求错误TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
     }
 
+    // 打开员工指定表格
     const openReviewRecord = ( record ) => {
         // record 是 Columns组件传递过来的值
         setCurrentRecord(record);
         setDialogStatus(true)
+    }
+
+    // 打开员工详情界面
+    const openDetailDialog = ( id ) => {
+        dispatch( { type:'staff/_getStaffDetail',  payload: { id } } )
     }
 
     return (
@@ -48,7 +56,7 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
                 pagination={false}
                 rowKey={(record) => record._id}
                 loading={loading.effects['staff/initStaffList']}
-                columns={ Columns({ userInfo, handleSave, openReviewRecord }) }
+                columns={ Columns({ userInfo, handleSave, openReviewRecord,openDetailDialog }) }
             />
 
             <Dialog
