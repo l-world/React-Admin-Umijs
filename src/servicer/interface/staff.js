@@ -18,3 +18,9 @@ export const deleteStaffs = (params) => ajax.post('/destroyStaff', params);
 
 //- 检测员工用户名或者是手机号码是否已经存在
 export const checkIsExists = (params) => ajax.post('/checkIsExists', params);
+
+//- 文件上传
+export const getUploadToken = (params) => ajax.get('/getUploadToken', params);
+
+//- 文件上传
+export const deleteFile = (params) => ajax.get('/deleteFile', params);
