@@ -14,6 +14,7 @@ export const resetPassword = params => ajax.post('/resetPassword', params);
 
 // 检测用户是否登录
 export const queryUserLogin = () => ajax.get('/queryLoginStatus');
+
 // 获取路由表
 export const getRouteList = () => ajax.get('//getRouteList');
 

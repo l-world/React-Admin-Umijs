@@ -7,6 +7,7 @@ import $http from 'api';
 import { useDispatch } from 'umi';
 import formList from 'staticList/staffList';
 import DropPopover from 'components/DropPopover';
+import Upload from 'components/Upload';
 
 const DetailForm = ({ staffDetail, _initStaffList }) => {
 
@@ -101,7 +102,14 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
                 }
             />
         ),
-        upload: (item) => <Input placeholder='hello world' />
+        upload: (item) => (
+            <Upload 
+            avatar={staffDetail.avatar}
+            getNewAvatar={(newAvatar) => {
+              _updateStaff('avatar', newAvatar);
+            }}
+            />
+        )
     }
 
     formData['input'];
