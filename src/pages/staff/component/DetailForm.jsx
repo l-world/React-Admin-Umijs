@@ -17,6 +17,9 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
     const beforeChecked = async (item) => {
         const newVal = form.getFieldValue(item.itemName);
         const oldVal = staffDetail[item.itemName];
+        if (typeof oldVal === 'object') {
+            oldVal = oldVal._id;
+        }
         try {
             //- 判断新旧值是否相同
             if (newVal === oldVal) return false;
@@ -80,7 +83,22 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
             <Input
                 placeholder={item.placeholderVal}
                 readOnly
-                addonAfter={<DropPopover />}
+                addonAfter={
+                    <DropPopover 
+                        placeholderVal={item.placeholderVal}
+                        interfaceName={ item.interfaceName }
+                        searchType={ item.itemName }
+                        getSelectItem={ (res) => {
+                            form.setFieldsValue({
+                                [item.itemName]: res[item.itemName],
+                                [item.itemName.split('N')[0]]: res._id,
+                              });
+                              const reqData = JSON.parse(JSON.stringify(item));
+                              reqData.itemName = reqData.itemName.split('N')[0];
+                              beforeChecked(reqData);
+                        }}
+                    />
+                }
             />
         ),
         upload: (item) => <Input placeholder='hello world' />
@@ -95,7 +113,9 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
             initialValues={
                 {
                     ...staffDetail,
-                    onboardingTime: moment(staffDetail.onboardingTime)
+                    onboardingTime: moment(staffDetail.onboardingTime),
+                    departmentName: staffDetail.department?.departmentName,
+                    levelName: staffDetail.level?.levelName,
                 }
             }
         >

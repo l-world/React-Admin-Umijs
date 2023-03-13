@@ -8,7 +8,7 @@ const Dialog = ({ title, dialogStatus, render, setDialogStatus, width = 600 }) =
             destroyOnClose={ true}
             centered={ true }
             title={ title }
-            visible={ dialogStatus }
+            open={ dialogStatus }
             onCancel={ () => setDialogStatus(false) }
             footer={ null }
         >
