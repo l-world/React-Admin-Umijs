@@ -47,7 +47,7 @@ const staff = () => {
                 _id={ staffDetail?._id}
                 interfaceName={'deleteStaffs'}
                 reloadList={ () => setPage(1) && _initStaffList()  }
-                render={  () => <DetailForm /> }
+                render={  () => <DetailForm staffDetail={staffDetail} _initStaffList={ _initStaffList } /> }
             />
         </div>
     )
