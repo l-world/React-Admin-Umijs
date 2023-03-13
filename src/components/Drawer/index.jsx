@@ -58,7 +58,7 @@ const DrawerComponent = ({ title, interfaceName, _id, render,reloadList}) => {
             width={ 500 }
             closable={ false }
             destroyOnClose={ true }
-            visible={ isShowDetailDialog }
+            open={ isShowDetailDialog }
             extra={ extra }
         >
             { render() }

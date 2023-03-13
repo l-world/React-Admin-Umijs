@@ -13,51 +13,53 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
 
-    //提交表单之前的验证
+    //- 提交表单之前的验证
     const beforeChecked = async (item) => {
         const newVal = form.getFieldValue(item.itemName);
         const oldVal = staffDetail[item.itemName];
         try {
-            if( oldVal === newVal ) return false;
-            if( item.itemName === 'accountName' || item.itemName === 'mobile'){
-                const reqData = new form.validateFields(item.itemName);
-                const {data,msg} = await $http.checkIsExists( { checkData:reqData } );
-                if(data){
-                    form.setFieldsValue( { [item.itemName] : staffDetail[item.itemName] } );
-                    return messages.error(msg)
+            //- 判断新旧值是否相同
+            if (newVal === oldVal) return false;
+            //- 账户名或者是手机号码进行验证
+            if (item.itemName === 'accountName' || item.itemName === 'mobile') {
+                const reqData = await form.validateFields([item.itemName]);
+                const { data, msg } = await $http.checkIsExists({ checkData: reqData });
+                if (data) {
+                    form.setFieldsValue({ [item.itemName]: staffDetail[item.itemName] });
+                    return message.error(msg);
                 }
             }
-            _updateStaff(item.itemName, newValue);
+            _updateStaff(item.itemName, newVal);
         } catch (error) {
-            form.setFieldsValue( { [item.itemName] : staffDetail[item.itemName] } );
+            form.setFieldsValue({ [item.itemName]: staffDetail[item.itemName] });
         }
-    }
+    };
 
     // 更新表单项
     const _updateStaff = async (type, updateVal) => {
-        const { code,msg } = await $http.updateStaff({
-            _id:staffDetail._id,
+        const { code, msg } = await $http.updateStaff({
+            _id: staffDetail._id,
             type,
             updateVal
         });
-        if(code) return;
+        if (code) return;
         message.success(msg);
         _initStaffList();
-        dispatch( { type:'staff/_getStaffDetail',payload:{ _id:staffDetail._id }  } )
-    } 
+        dispatch({ type: 'staff/_getStaffDetail', payload: { _id: staffDetail._id } })
+    }
 
     const formData = {
-        input:( item ) => (
-            <Input 
-                placeholder={ item.itemName === 'password' ? "请在登录界面完成修改" : item.placeholderVal }
-                disabled={ item.itemName === 'password'}
-                onBlur={ () => beforeChecked(item) }
+        input: (item) => (
+            <Input
+                placeholder={item.itemName === 'password' ? "请在登录界面完成修改" : item.placeholderVal}
+                disabled={item.itemName === 'password'}
+                onBlur={() => beforeChecked(item)}
             />
         ),
-        select: ( item ) => (
-            <Select placeholder={ item.placeholderVal } onChange={ () => beforeChecked(item) } >
+        select: (item) => (
+            <Select placeholder={item.placeholderVal} onChange={() => beforeChecked(item)} >
                 {
-                    item.optionData.map( (val,index) => {
+                    item.optionData.map((val, index) => {
                         return (
                             <Option key={index} value={index} >
                                 {val}
@@ -68,20 +70,20 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
             </Select>
         ),
         date: (item) => (
-            <DatePicker 
-                style={{ width: "100%"}}
+            <DatePicker
+                style={{ width: "100%" }}
                 placeholder={item.placeholderVal}
-                onChange={ () => beforeChecked(item) }
+                onChange={() => beforeChecked(item)}
             />
         ),
         popover: (item) => (
             <Input
                 placeholder={item.placeholderVal}
                 readOnly
-                addonAfter={ <DropPopover/> }
+                addonAfter={<DropPopover />}
             />
         ),
-        upload:(item) => <Input placeholder='hello world' />
+        upload: (item) => <Input placeholder='hello world' />
     }
 
     formData['input'];
@@ -93,27 +95,27 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
             initialValues={
                 {
                     ...staffDetail,
-                    onboardingTime:moment( staffDetail.onboardingTime)
+                    onboardingTime: moment(staffDetail.onboardingTime)
                 }
             }
         >
             {
-                formList.map( (arr,index)  => {
+                formList.map((arr, index) => {
                     return (<Row key={index} justify={'space-between'} >
                         {
-                            arr.map( (item, childIndex) => {
+                            arr.map((item, childIndex) => {
                                 // console.log( item.renderType);
                                 return (<Col span="11" key={childIndex} >
                                     <Form.Item
-                                        style={{...item.style}}
+                                        style={{ ...item.style }}
                                         name={item.itemName}
                                         label={item.labelTxt}
-                                        rules={ staffRule[item.itemName]}
+                                        rules={staffRule[item.itemName]}
                                     >
-                                        { formData[item.renderType](item) }
+                                        {formData[item.renderType](item)}
                                     </Form.Item>
                                 </Col>)
-                            } )
+                            })
                         }
                     </Row>)
                 })

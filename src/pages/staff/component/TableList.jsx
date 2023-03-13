@@ -37,8 +37,8 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
     }
 
     // 打开员工详情界面
-    const openDetailDialog = ( id ) => {
-        dispatch( { type:'staff/_getStaffDetail',  payload: { id } } )
+    const openDetailDialog = ( _id ) => {
+        dispatch( { type:'staff/_getStaffDetail',  payload: { _id } } )
     }
 
     return (
