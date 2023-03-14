@@ -1,5 +1,15 @@
+// @ts-nocheck
 import React from 'react';
-import { Form, Input, Select, Button, DatePicker, Row, Col, message } from 'antd';
+import {
+    Form,
+    Input,
+    Select,
+    Button,
+    DatePicker,
+    Row,
+    Col,
+    message,
+} from 'antd';
 import formList from 'staticList/staffList';
 import DropPopover from 'components/DropPopover';
 import { staffRule } from 'utils/rules';
@@ -9,10 +19,9 @@ import Upload from 'components/Upload';
 const { Option } = Select;
 
 const AddForm = ({ setDialogStatus, reloadList }) => {
-
     const [form] = Form.useForm();
 
-    // 新增员工
+    //- 新增用户表单提交
     const _onFinish = async (data) => {
         delete data.departmentName;
         delete data.levelName;
@@ -24,21 +33,20 @@ const AddForm = ({ setDialogStatus, reloadList }) => {
         form.resetFields();
     };
 
+    //- 用户名密码的检测
     const beforeChecked = async (item) => {
-        console.log( item)
         if (item.itemName !== 'accountName' || item.itemName !== 'mobile') return;
 
         const reqData = await form.validateFields([item.itemName]);
         const { data, msg } = await $http.checkIsExists({ checkData: reqData });
 
         if (data) {
-            console.log( data );
             form.setFieldsValue({ [item.itemName]: '' });
             return message.error(msg);
         }
     };
 
-    // 表单项
+    //- 表单项
     const formData = {
         input: (item) => (
             <Input
@@ -48,16 +56,14 @@ const AddForm = ({ setDialogStatus, reloadList }) => {
             />
         ),
         select: (item) => (
-            <Select placeholder={item.placeholderVal} >
-                {
-                    item.optionData.map((val, index) => {
-                        return (
-                            <Option key={index} value={index} >
-                                {val}
-                            </Option>
-                        )
-                    })
-                }
+            <Select placeholder={item.placeholderVal}>
+                {item.optionData.map((val, index) => {
+                    return (
+                        <Option key={index} value={index}>
+                            {val}
+                        </Option>
+                    );
+                })}
             </Select>
         ),
         date: (item) => (
@@ -82,48 +88,46 @@ const AddForm = ({ setDialogStatus, reloadList }) => {
                 }
             />
         ),
-        upload: () => (
+        upload: (item) => (
             <Upload
                 getNewAvatar={(avatar) => {
                     form.setFieldsValue({ avatar });
                 }}
             />
         ),
-    }
+    };
 
     return (
-        <Form layout="vertical" onFinish={_onFinish} >
-            {
-                formList.map((arr, index) => {
-                    return (
-                        <Row key={index} justify={'space-between'} >
-                            {
-                                arr.map((item, childIndex) => {
-                                    return (
-                                        <Col span="11" key={childIndex} >
-                                            <Form.Item
-                                                style={{ ...item.style }}
-                                                name={item.itemName}
-                                                label={item.labelTxt}
-                                                rules={staffRule[item.itemName]}
-                                            >
-                                                {formData[item.renderType](item)}
-                                            </Form.Item>
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
-                    )
-                })
-            }
+        <Form layout="vertical" form={form} onFinish={_onFinish}>
+            {formList.map((arr, index) => {
+                return (
+                    <Row key={index} justify={'space-between'}>
+                        {arr.map((item, childIndex) => {
+                            return (
+                                <Col span="11" key={childIndex}>
+                                    <Form.Item
+                                        style={{ ...item.style }}
+                                        name={item.itemName}
+                                        label={item.labelTxt}
+                                        rules={staffRule[item.itemName]}
+                                    >
+                                        {formData[item.renderType](item)}
+                                    </Form.Item>
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                );
+            })}
             <Col span={24} style={{ textAlign: 'right' }}>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" style={{ zIndex: 99 }} >创建</Button>
+                    <Button type="primary" htmlType="submit">
+                        创建
+                    </Button>
                 </Form.Item>
             </Col>
         </Form>
-    )
-}
+    );
+};
 
-export default AddForm
+export default AddForm;

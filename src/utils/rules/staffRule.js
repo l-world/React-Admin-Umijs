@@ -67,8 +67,8 @@ export const staffRule = {
     graduatedSchool: [
       { required: true, message: '毕业院校不能为空' },
     ],
-    // avatar: [
-    // //   { required: true, message: '员工照片不能为空' },
-    // ],
+    avatar: [
+      { required: true, message: '员工照片不能为空' },
+    ],
   }
   
