@@ -69,7 +69,7 @@ const AddForm = ({ setDialogStatus, reloadList }) => {
         date: (item) => (
             <DatePicker style={{ width: '100%' }} placeholder={item.placeholderVal} />
         ),
-        popover: (item) => (
+        popover: (item) =>(
             <Input
                 placeholder={item.placeholderVal}
                 readOnly
@@ -110,7 +110,7 @@ const AddForm = ({ setDialogStatus, reloadList }) => {
                                         name={item.itemName}
                                         label={item.labelTxt}
                                         rules={staffRule[item.itemName]}
-                                    >
+                                    >   
                                         {formData[item.renderType](item)}
                                     </Form.Item>
                                 </Col>

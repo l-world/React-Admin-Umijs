@@ -52,10 +52,10 @@ export const staffRule = {
       { max: 18, message: '银行卡长度不正确' },
       { min: 15, message: '银行卡长度不正确' },
     ],
-    department: [
+    departmentName: [
       { required: true, message: '部门不能为空' },
     ],
-    level: [
+    levelName: [
       { required: true, message: '职级不能为空' },
     ],
     education: [
