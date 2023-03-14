@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from ' antd';
+import { Button } from 'antd';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'umi';
 import IconMap from 'components/IconMap';
@@ -43,7 +43,7 @@ const index = () => {
     return ( 
         <div className='department-container'>
             <Button
-                className={classNames('create-department-btn',{small:collapse})}
+                className={classnames('create-department-btn',{small:collapse})}
                 size="small"
                 shape="round"
                 icon={IconMap.add}
