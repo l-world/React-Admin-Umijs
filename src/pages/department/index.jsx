@@ -51,7 +51,7 @@ const index = () => {
             >
                 创建
             </Button>
-            <Tree getDepartment={getDepartment} />
+            <Tree getDepartmentDetail={getDepartmentDetail} />
             {/* 新增部门与部门详情对话框 */}
             <Dialog 
                 title={modalTitleComponent}

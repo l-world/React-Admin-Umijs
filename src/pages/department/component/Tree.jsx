@@ -1,18 +1,23 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'umi';
 import OrgTree from 'react-org-tree';
 
 const Tree = ({ getDerparmentDetail }) => {
-    
     const dispatch = useDispatch();
-    const departmentList = useSelector( state => {
+    const departmentList = useSelector( state => 
         JSON.parse(
             JSON.stringify(
                 state.department.departmentList.
                 filter( item => !item.parentLists.length)
             )
         )
-    });
+    );
+    useEffect(() => {
+        dispatch({
+          type: 'department/_initDepartmentList',
+          payload: {},
+        });
+      }, []);
 
     const addProps = (list) => {
         list.forEach( item => {
