@@ -9,7 +9,7 @@ const SearchContainer = ( { render } ) => {
     const dispatch = useDispatch();
 
     const clearForm = () => {
-        dispatch( { type:'common/clearForm',payload:{isClearForm:true} } )
+        dispatch( { type:'common/clearForm',payload:{ isClearForm:true } } )
     }
 
     return (
