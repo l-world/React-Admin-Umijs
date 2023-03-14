@@ -10,6 +10,7 @@ const FilterForm = ({reload}) => {
     const [form] = Form.useForm();
     const { userInfo:{identity }} = useSelector( state => state.user);
     const { isClearForm } = useSelector((state) => state.common);
+    
     const [queryData, setQueryData] = useState({
         education: null,
         level: null,
@@ -31,14 +32,12 @@ const FilterForm = ({reload}) => {
                 userName: null,
                 marriage: null,
             })
-            dispatch( { type:'common/clearForm', payload:{isClearForm:true}})
+            dispatch({ type: 'common/clearForm', payload: { isClearForm: false  } });
         }
     }, [isClearForm])
 
-
     const searchStaff = (type) =>{
         const tempData = JSON.parse(JSON.stringify(queryData));
-        console.log(tempData);
         if( typeof type === 'object'){
             Object.assign(tempData,type);
         }else{
