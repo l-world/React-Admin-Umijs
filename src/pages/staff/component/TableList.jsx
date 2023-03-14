@@ -41,6 +41,11 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
         dispatch( { type:'staff/_getStaffDetail',  payload: { _id } } )
     }
 
+    // 单选全选按钮触发函数
+    const onSelectChange = (ids) => {
+        dispatch({ type:'common/saveSelectIds', payload: { ids }})
+    }
+
     return (
         <>
             <Table
@@ -56,6 +61,7 @@ const TableList = ({ userInfo, staffList, loading, reloadPage }) => {
                 pagination={false}
                 rowKey={(record) => record._id}
                 loading={loading.effects['staff/_initStaffList']}
+                rowSelection={{ onChange: onSelectChange }}
                 columns={ Columns({ userInfo, handleSave, openReviewRecord,openDetailDialog }) }
             />
 

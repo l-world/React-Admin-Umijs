@@ -5,6 +5,7 @@ export default {
         collapse:false,
         isShowDetailDialog:false,
         isClearForm:false,
+        ids:[],
     },
     // 路由守卫，
     subscriptions:{
@@ -19,7 +20,8 @@ export default {
         setShowDetailDialog: (state, { payload }) => ({ ...state, ...payload }),
         // 清空搜索表单
         clearForm: (state, { payload }) => ({ ...state, ...payload }),
-        
+        //保存需要删除的id集合
+        saveSelectIds: (state, { payload }) => ({ ...state, ...payload }),
     },
     effects:{
         *queryUserLogin({payload},{put,call}){
@@ -42,6 +44,8 @@ export default {
                 // 不需要登录，清楚缓存
                 sessionStorage.clear();
             }
+
+             //- 判定用户当前的访问路径
         }
     }
 }
