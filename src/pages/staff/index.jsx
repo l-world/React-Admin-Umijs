@@ -9,7 +9,7 @@ import DetailForm from './component/DetailForm';
 import useCommon from 'hook/useCommon';
 import Dialog from 'components/Dialog';
 import AddForm from './component/AddForm';
-
+const size = 5
 const staff = () => {
     // const [page, setPage] = useState(1)
     const [page, setPage] = useCommon();
@@ -26,12 +26,13 @@ const staff = () => {
     const _initStaffList = (data) =>
         dispatch({
             type: 'staff/_initStaffList',
-            payload: { size: 5, page: page.current, ...data }, //-{department:'',userName:''}
+            payload: { size: size, page: page.current, ...data }, //-{department:'',userName:''}
         });
-
+    
+    // 改变当前展示列表的页数
     const changePage = (currentPage) => {
         setPage(currentPage);
-        _initStaffList(page);
+        _initStaffList();
     }
 
     //- 根据搜索条件进行列表展示
@@ -44,7 +45,7 @@ const staff = () => {
             <TableHeader
                 page={page.current}
                 total={staffTotal}
-                size={10}
+                size={size}
                 changePage={changePage}
                 interfaceDelMethod={'deleteStaffs'}
                 openAddDialog={() => setDialogStatus(true)}
