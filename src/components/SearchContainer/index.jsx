@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import classNames from 'classNames';
 import IconMap from '../IconMap';
-import './index.less'
+import './index.less';
+import { useDispatch } from 'umi';
 
 const SearchContainer = ( { render } ) => {
     const [closeStatus, setcloseStatus] = useState(false);
+    const dispatch = useDispatch();
 
     const clearForm = () => {
-        console.log('clearForm');
+        dispatch( { type:'common/clearForm',payload:{isClearForm:true} } )
     }
 
     return (

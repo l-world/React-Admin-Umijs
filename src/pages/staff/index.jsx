@@ -23,12 +23,21 @@ const staff = () => {
         _initStaffList();
     }, [])
 
-    const _initStaffList = () => dispatch({ type: 'staff/_initStaffList', payload: { size: 10, page: page.current } })
+    const _initStaffList = (data) =>
+        dispatch({
+            type: 'staff/_initStaffList',
+            payload: { size: 5, page: page.current, ...data }, //-{department:'',userName:''}
+        });
 
     const changePage = (currentPage) => {
         setPage(currentPage);
         _initStaffList(page);
     }
+
+    //- 根据搜索条件进行列表展示
+    const getQueryData = (queryData) => {
+        _initStaffList(queryData);
+    };
 
     return (
         <div className='main-content'>
@@ -40,7 +49,13 @@ const staff = () => {
                 interfaceDelMethod={'deleteStaffs'}
                 openAddDialog={() => setDialogStatus(true)}
             />
-            <SearchContainer render={() => <FilterForm />} />
+            {/* 搜索 */}
+            <SearchContainer
+                render={() => (
+                    <FilterForm reload={(data) => setPage(1) && getQueryData(data)} />
+                )}
+            />
+            {/* 列表 */}
             <TableList
                 userInfo={userInfo}
                 staffList={staffList}

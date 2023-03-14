@@ -4,6 +4,7 @@ export default {
     state:{
         collapse:false,
         isShowDetailDialog:false,
+        isClearForm:false,
     },
     // 路由守卫，
     subscriptions:{
@@ -16,6 +17,9 @@ export default {
         // 改变菜单折叠状态
         changeCollapse:(state,{payload}) => ({ ...state, ...payload }),
         setShowDetailDialog: (state, { payload }) => ({ ...state, ...payload }),
+        // 清空搜索表单
+        clearForm: (state, { payload }) => ({ ...state, ...payload }),
+        
     },
     effects:{
         *queryUserLogin({payload},{put,call}){
