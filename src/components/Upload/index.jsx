@@ -34,7 +34,6 @@ const UploadComponent = ({ avatar, getNewAvatar }) => {
 
     // 图片发生改变
     const handleChange = (info) => {
-        console.log(info);
         setFileList(info.fileList);
         if(info.file.status === 'done'){
             setPreviewImg('//' + info.file.response.url);
@@ -63,11 +62,8 @@ const UploadComponent = ({ avatar, getNewAvatar }) => {
             accessKey: '8QQD0qX3ER_tMNfKMeYfueFECLJW1Zyg7zExska0', //- 公钥
             secretKey: 'T4fa8ULII7kOxqv9oCDRGhC3zb37vSKnXPtFYPQk', //- 私钥
         })
-        console.log( data , " token ==== ")
         setToken(data);
     }
-
-
 
     return (
         <>
