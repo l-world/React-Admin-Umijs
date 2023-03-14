@@ -101,7 +101,7 @@ const FilterForm = ({reload}) => {
                     />
             </Form.Item>
             {
-                identity  && (
+                identity === 1  && (
                     <>
                         <Form.Item label="婚姻状况" name="marriage" >
                             <Select allowClear onChange={ () => searchStaff("marriage") } placeholder="根据婚姻状况进行员工搜索" >

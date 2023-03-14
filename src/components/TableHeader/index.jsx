@@ -9,6 +9,7 @@ import $http from 'api';
 const TableHeader = ({ page, size, total, changePage, openAddDialog, interfaceDelMethod }) => {
 
     const { collapse, ids } = useSelector(state => state.common);
+    const { userInfo } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
     // 删除选定的列表项
@@ -32,10 +33,13 @@ const TableHeader = ({ page, size, total, changePage, openAddDialog, interfaceDe
 
     return (
         <div className={classNames('table-header-container', { 'big-style': collapse })} >
-            <div>
-                <Button className='mr-10' size='small' shape='round' icon={IconMap.add} onClick={openAddDialog} >创建</Button>
-                <Button danger size='small' shape='round' icon={IconMap.del} onClick={delHandle} >批量删除</Button>
-            </div>
+            {
+                userInfo.identity === 1 &&
+                    <div>
+                        <Button className='mr-10' size='small' shape='round' icon={IconMap.add} onClick={openAddDialog} >创建</Button>
+                        <Button danger size='small' shape='round' icon={IconMap.del} onClick={delHandle} >批量删除</Button>
+                    </div>
+            }
             <div className="pagination-container">
                 <Pagination
                     simple

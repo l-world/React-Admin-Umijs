@@ -16,15 +16,18 @@ const Columns = ({ userInfo, handleSave,openReviewRecord, openDetailDialog }) =>
                 return (
                     <>
                         <span className='user-name' >{userName}</span>
-                        <span 
-                            className='c-r'
-                            onClick={ (e) =>{
-                                e.stopPropagation();
-                                openDetailDialog(_id);
-                            }} 
-                        >
-                            {IconMap.detail}
-                        </span>
+                        {
+                            userInfo.identity === 1 && 
+                            <span 
+                                className='c-r'
+                                onClick={ (e) =>{
+                                    e.stopPropagation();
+                                    openDetailDialog(_id);
+                                }} 
+                            >
+                                {IconMap.detail}
+                            </span>
+                            }
                     </>
                 )
             }
@@ -198,7 +201,7 @@ const Columns = ({ userInfo, handleSave,openReviewRecord, openDetailDialog }) =>
 
     renderColumnsList = renderColumnsList.map(col => {
         // 当前不可编辑的单元格
-        if (!col.editable) return col;
+        if (!col.editable || userInfo.identity === 0) return col;
         // 当前可编辑的单元格
         return {
             ...col,
