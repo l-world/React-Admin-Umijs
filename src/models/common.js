@@ -2,7 +2,7 @@ import $http from 'api';
 export default {
     namespace: 'common',
     state:{
-        collapse:false,
+        collapse:false, //监听侧边栏是否折叠
         isShowDetailDialog:false,
         isClearForm:false,
         ids:[],
