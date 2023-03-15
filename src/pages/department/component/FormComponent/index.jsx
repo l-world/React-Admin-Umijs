@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Input, Row, Descriptions } from 'antd';
 import { useDispatch } from 'umi';
 import { departmentRule } from 'utils/rules';
@@ -7,8 +7,32 @@ import childDepartment from '../childDepartment';
 import './index.less'
 
 
-const FormComponent = () => {
+const FormComponent = ({ modalType,setDialogStatus}) => {
     const [form] = Form.useForm();
+    const dispatch = useDispatch();
+    const [childList, setChildList] = useState(second)
+
+    // 新增表单提交
+    const  _onFinish = (data) => {
+        const children = form.getFieldValue('children');
+        const departmentLeader = form.getFieldValue('departmentLeader');
+        delete data.departmentLeaderName
+        dispatch( { type:'department/_addDepartment', payload:{
+            departmentLeader,
+            children,
+            ...data
+        }})
+
+        setDialogStatus(false);
+    }
+
+    // 新增子部门或者修改子部门
+    const pushOrUpdateList = (data) => {
+        const childrenIds = data.list.map( item => item._id);
+        setChildList(data.list);
+        form.setFieldsValue({children:childrenIds})
+    }
+
     return (
         <Form form={form} onFinish={_onFinish} >
 
