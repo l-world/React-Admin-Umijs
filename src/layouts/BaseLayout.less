@@ -3,6 +3,7 @@
     // padding: 0;
     height: 100%;
     overflow: hidden;
+
     .container {
         height: 100%;
 
@@ -167,7 +168,37 @@
     }
 
     box-shadow: rgb(24 144 255 / 10%) 0 0 28px 0;
-    .c-r{
+
+    .c-r {
         cursor: pointer;
     }
+
+    /* 部门样式 */
+    .department-container {
+        margin: 20px;
+        min-height: 100%;
+        background-color: #fff;
+        width: 100%;
+
+        .create-department-btn {
+            position: fixed;
+            top: 23px;
+            left: 260px;
+
+            &.small {
+                left: 150px;
+            }
+        }
+
+        .org-tree-node-label {
+            cursor: pointer;
+        }
+    }
+}
+
+.department-modal-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
 }

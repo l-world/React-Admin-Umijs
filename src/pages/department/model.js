@@ -8,7 +8,7 @@ export default {
     },
     reducers:{
         // 保存部门列表
-        saveDepartmentList:(state,{payload}) => ({...state, ...payload}),
+        saveDepartmentList:(state,{payload}) => ( {...state, ...payload} ),
         // 保存部门详情
         saveDepartmentDetail:(state,{payload}) => ({...state, ...payload})
     },
@@ -19,7 +19,7 @@ export default {
             yield put(
                 {
                     type:'saveDepartmentList',
-                    payload:{ departmentList:data.list }
+                    payload:{ departmentList: data.list }
                 }
             )
         },
