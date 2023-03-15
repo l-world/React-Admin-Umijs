@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import { useSelector, useDispatch } from 'umi';
 import IconMap from 'components/IconMap';
 import Tree from './component/Tree';
-import Dialog from 'components/Dialog'
+import Dialog from 'components/Dialog';
+import FormComponent  from './component/FormComponent';
 
 const index = () => {
     const { collapse } = useSelector( state => state.common);
@@ -58,7 +59,7 @@ const index = () => {
                 dialogStatus={dialogStatus}
                 setDialogStatus={setDialogStatus}
                 width={800}
-                render={ () => {} }
+                render={ () =>  <FormComponent /> }
             />
         </div>
     )

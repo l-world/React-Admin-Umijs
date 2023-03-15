@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Button, Input, Row, Descriptions } from 'antd';
 import { useDispatch } from 'umi';
-import { departmentRule } from 'utils/rules';
+import {departmentRule} from 'utils/rules';
 import DropPopover from 'components/DropPopover'; 
-import childDepartment from '../childDepartment'; 
+import ChildDepartment from '../ChildDepartment'; 
 import './index.less'
-
 
 const FormComponent = ({ modalType,setDialogStatus}) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const [childList, setChildList] = useState(second)
+    const [childList, setChildList] = useState([])
 
     // 新增表单提交
     const  _onFinish = (data) => {
@@ -57,7 +56,7 @@ const FormComponent = ({ modalType,setDialogStatus}) => {
                     />
                 </Descriptions.Item>
 
-                <Description.Item label="部门负责人">
+                <Descriptions.Item label="部门负责人">
                     <Form.Item name="departmentLeaderName" rules={departmentRule.departmentLeader}  >
                         <Input
                             placeholder="请输入部门负责人"
@@ -78,7 +77,7 @@ const FormComponent = ({ modalType,setDialogStatus}) => {
                             }
                         />
                     </Form.Item>
-                </Description.Item>
+                </Descriptions.Item>
             
             </Descriptions>
 
