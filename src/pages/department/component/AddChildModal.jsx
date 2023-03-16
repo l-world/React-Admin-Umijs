@@ -6,9 +6,9 @@ const { Column } = Table;
 const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) => {
 
     const [childList, setChildList] = useState([]);
-    
+
     const departmentList = useSelector((state) => {
-        return state.department.departmentList.filter((item) => item.parentLists[0] == null);
+        return state.department.departmentList.filter((item) => item.parentLists[0] !== null);
     });
 
     // 清空 + 关闭弹窗
@@ -17,7 +17,7 @@ const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) 
     }
 
     const addChildList = () => {
-        const sendData = { list: childList, type:'add' };
+        const sendData = { list: childList, type: 'add' };
         pushOrUpdateList(sendData);
         setShowChildModal(false);
     }
@@ -26,16 +26,16 @@ const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) 
         <Modal
             title="增加子部门"
             open={showChildModal}
-            onCanel={clearSelect}
+            onCancel={clearSelect}
             onOk={addChildList}
             destroyClose
         >
             <Table
-                dataSource={departmentList}
+                dataSource={ departmentList }
                 rowSelection={{ onChange: (ids, record) => setChildList(record) }}
                 pagination={false}
                 expandIconColumnIndex={-1}
-                rowKey={(record) => record._id}
+                rowKey={(record) =>  record._id }
             >
                 <Column title="部门名称" dataIndex="departmentName" />
             </Table>

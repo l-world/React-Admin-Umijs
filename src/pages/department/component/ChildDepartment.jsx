@@ -26,6 +26,7 @@ const ChildDepartment = ({childList,pushOrUpdateList}) => {
             <Table
                 dataSource={childList}
                 rowSelecttion={ { onchange:(ids) => setDelIds(ids) } }
+                pagination={false}
                 expandIconColumnIndex={1}
                 rowKey={ (record) => record._id }
             >
@@ -34,7 +35,7 @@ const ChildDepartment = ({childList,pushOrUpdateList}) => {
 
             {/* 操纵按钮 */}
             <div className="operation">
-                <Button type="primary" style={{marginRight:'10px'}} icon={IconMap.api}  onClick={{ getDepartmentList }} >增加子部门</Button>
+                <Button type="primary" style={{marginRight:'10px'}} icon={IconMap.api}  onClick={ getDepartmentList } >增加子部门</Button>
                 <Button  disabled={!delIds.length} icon={IconMap.del}  onClick={() => setShowDelModal(true)} >接触子部门关联</Button>
             </div>
 

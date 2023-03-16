@@ -59,7 +59,8 @@ const index = () => {
                 dialogStatus={dialogStatus}
                 setDialogStatus={setDialogStatus}
                 width={800}
-                render={ () =>  <FormComponent /> }
+                className="department-detail-modal"
+                render={ () =>  <FormComponent setDialogStatus={setDialogStatus} modalType={modalType} /> }
             />
         </div>
     )

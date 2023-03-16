@@ -33,8 +33,8 @@ const DropPopover = ({placeholderVal,interfaceName,searchType,getSelectItem}) =>
             size:5,
             queryData
         });
-        setTotal(data.total);
-        setList(data.list);
+        setTotal(data.total || data.staffTotal);
+        setList(data.list || data.staffList);
     }
 
     const onSearch = (val) => {
