@@ -21,7 +21,6 @@ export default {
         *_initDepartmentList({ payload }, { put, call }) {
             const { data } = yield call($http.getDepartmentList, payload);
             data.list = formatDepartmentList(data.list);
-            console.log(data.list);
             yield put(
                 {
                     type: 'saveDepartmentList',
@@ -34,9 +33,11 @@ export default {
         *_getDepartmentDetail({ payload }, { put, call }) {
             const { data } = yield call($http.getDepartmentDetail, payload);
             
+            // 过滤数据
             if(data.children && data.children.every( item => item === null)){
                 data.children = [];
             }
+
             yield put({
                 type: 'saveDepartmentDetail',
                 payload: { departmentDetail: data }
