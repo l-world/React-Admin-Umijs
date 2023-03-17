@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Input, Row, Descriptions } from 'antd';
-import { useDispatch } from 'umi';
+import { useDispatch,useSelector } from 'umi';
 import {departmentRule} from 'utils/rules';
 import DropPopover from 'components/DropPopover'; 
 import ChildDepartment from '../ChildDepartment'; 
@@ -9,7 +9,8 @@ import './index.less'
 const FormComponent = ({ modalType,setDialogStatus}) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const [childList, setChildList] = useState([])
+    const [childList, setChildList] = useState([]);
+    const { departmentDetail } = useSelector( state => state.department ); 
 
     // 新增表单提交
     const  _onFinish = (data) => {
@@ -33,7 +34,15 @@ const FormComponent = ({ modalType,setDialogStatus}) => {
     }
 
     return (
-        <Form form={form} onFinish={_onFinish} >
+        <Form 
+            form={form} 
+            onFinish={_onFinish}
+            initialValues={{
+                departmentName: departmentDetail?.departmentName,
+                remark: departmentDetail?.remark,
+                departmentLeaderName: departmentDetail?.departmentLeader?.userName,
+            }}
+        >
 
             <Descriptions column={1} labelStyle={{ width: '150px' }} bordered >
 

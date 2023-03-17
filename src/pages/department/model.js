@@ -5,13 +5,15 @@ export default {
     namespace: "department",
     state: {
         departmentList: [],
-        departmentDetail: null
+        departmentDetail: null,
+        showModalDialog: false,
     },
     reducers: {
         // 保存部门列表
         saveDepartmentList: (state, { payload }) => ({ ...state, ...payload }),
         // 保存部门详情
-        saveDepartmentDetail: (state, { payload }) => ({ ...state, ...payload })
+        saveDepartmentDetail: (state, { payload }) => ({ ...state, ...payload }),
+        saveShowModalDialog: (state, { payload }) => ({ ...state, ...payload }),
     },
     effects: {
         // 获取部门列表
@@ -32,6 +34,10 @@ export default {
                 type: 'saveDepartmentDetail',
                 payload: { departmentDetail: data }
             })
+            yield put({
+                type: 'saveShowModalDialog',
+                payload: { showModalDialog: true },
+              });
         },
         //- 新增部门
         *_addDepartment({ payload }, { put, call }) {
