@@ -23,7 +23,7 @@ const Tree = ({ getDepartmentDetail }) => {
     // 处理数据
     const addProps = (list) => {
         list.forEach(item => {
-            if(item.children.every( item => item === null)){
+            if(item.children && item.children.every( item => item === null)){
                 item.children = []
             }
             if (item) {

@@ -28,7 +28,7 @@ const ChildDepartment = ({childList,pushOrUpdateList}) => {
                 rowSelecttion={ { onchange:(ids) => setDelIds(ids) } }
                 pagination={false}
                 expandIconColumnIndex={1}
-                rowKey={ (record) => record._id }
+                rowKey={ (record) => record?._id }
             >
                 <Column title="名称" dataIndex="departmentName" />
             </Table>

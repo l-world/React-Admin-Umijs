@@ -3,10 +3,10 @@ import { Modal, Table } from 'antd';
 import { useSelector } from 'umi';
 const { Column } = Table;
 
-const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) => {
+const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList}) => {
 
     const [childList, setChildList] = useState([]);
-
+    const { departmentDetail } = useSelector((state) => state.department);
     const departmentList = useSelector((state) => {
         return state.department.departmentList.filter((item) => item.parentLists[0] !== null);
     });
@@ -17,9 +17,15 @@ const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) 
     }
 
     const addChildList = () => {
-        const sendData = { list: childList, type: 'add' };
+        const sendData = { list: childList, type: departmentDetail ? "update" : "add" };
         pushOrUpdateList(sendData);
         setShowChildModal(false);
+        // if (departmentDetail) {
+        //     pushOrUpdateList({ list: childList, type: 'update' });
+        //   } else {
+        //     pushOrUpdateList({ list: childList.concat(existsList), type: 'add' });
+        //   }
+        //   setShowChildModal(false);
     }
 
     return (
@@ -35,7 +41,7 @@ const AddChildModal = ({ showChildModal, setShowChildModal, pushOrUpdateList }) 
                 rowSelection={{ onChange: (ids, record) => setChildList(record) }}
                 pagination={false}
                 expandIconColumnIndex={-1}
-                rowKey={(record) =>  record._id }
+                rowKey={(record) =>  record?._id }
             >
                 <Column title="部门名称" dataIndex="departmentName" />
             </Table>

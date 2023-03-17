@@ -30,25 +30,29 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
     }
 
     // 新增子部门或者修改子部门
-    const pushOrUpdateList = (data) => {
-        const childrenIds = data.list.map(item => item._id);
-        setChildList(data.list);
-        form.setFieldsValue({ children: childrenIds })
+    const pushOrUpdateList = ({list,type}) => {
+        const childrenIds = list.map((item) => item._id);
+        if (type === 'update') {
+            updateDepartment({ type: 'children', updateVal: childrenIds });
+        } else {
+            setChildList(list);
+            form.setFieldsValue({ children: childrenIds });
+        }
     }
 
-     //- 修改部门信息
-    const updateDepartment = ({type,updateVal,isDelete=false}) => {
-        if(!updateVal){
+    //- 修改部门信息
+    const updateDepartment = ({ type, updateVal, isDelete = false }) => {
+        if (!updateVal) {
             updateVal = form.getFieldValue(type);
             // 判断新旧是否相等
-            if(updateVal === departmentDetail[type]) return;
+            if (updateVal === departmentDetail[type]) return;
         }
 
         dispatch(
             {
-                type:'department/updateDepartmentDetail',
-                payload:{
-                    _id:departmentDetail._id,
+                type: 'department/updateDepartmentDetail',
+                payload: {
+                    _id: departmentDetail._id,
                     type,
                     updateVal,
                     isDelete
@@ -72,27 +76,27 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
 
                 <Descriptions.Item label="部门名称" >
                     <Form.Item name="departmentName" rules={departmentRule.departmentName} >
-                        <Input onBlur={ () => { 
-                                modalType === 'update' &&
+                        <Input onBlur={() => {
+                            modalType === 'update' &&
                                 updateDepartment({ type: 'departmentName' });
-                            }} 
+                        }}
                         />
                     </Form.Item>
                 </Descriptions.Item>
 
                 <Descriptions.Item label="备注">
                     <Form.Item name="remark">
-                        <Input onBlur={ () => { 
-                                modalType === 'update' &&
+                        <Input onBlur={() => {
+                            modalType === 'update' &&
                                 updateDepartment({ type: 'remark' });
-                            }}
+                        }}
                         />
                     </Form.Item>
                 </Descriptions.Item>
 
                 <Descriptions.Item label="子部门">
                     <ChildDepartment
-                        childList={childList}
+                        childList={modalType === 'update' ? departmentDetail?.children : childList}
                         pushOrUpdateList={pushOrUpdateList}
                     />
                 </Descriptions.Item>
@@ -121,11 +125,11 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
                     </Form.Item>
                 </Descriptions.Item>
 
-                { modalType === 'update' && (
+                {modalType === 'update' && (
                     <Descriptions.Item label="部门员工">
                         <StaffTable staffList={departmentDetail.staffList} />
                     </Descriptions.Item>
-                ) }
+                )}
 
             </Descriptions>
 
