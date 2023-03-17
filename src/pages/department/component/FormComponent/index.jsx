@@ -1,41 +1,44 @@
 import React, { useState } from 'react';
 import { Form, Button, Input, Row, Descriptions } from 'antd';
-import { useDispatch,useSelector } from 'umi';
-import {departmentRule} from 'utils/rules';
-import DropPopover from 'components/DropPopover'; 
-import ChildDepartment from '../ChildDepartment'; 
+import { useDispatch, useSelector } from 'umi';
+import { departmentRule } from 'utils/rules';
+import DropPopover from 'components/DropPopover';
+import ChildDepartment from '../ChildDepartment';
+import StaffTable from '../StaffTable';
 import './index.less'
 
-const FormComponent = ({ modalType,setDialogStatus}) => {
+const FormComponent = ({ modalType, setDialogStatus }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const [childList, setChildList] = useState([]);
-    const { departmentDetail } = useSelector( state => state.department ); 
+    const { departmentDetail } = useSelector(state => state.department);
 
     // 新增表单提交
-    const  _onFinish = (data) => {
+    const _onFinish = (data) => {
         const children = form.getFieldValue('children');
         const departmentLeader = form.getFieldValue('departmentLeader');
         delete data.departmentLeaderName
-        dispatch( { type:'department/_addDepartment', payload:{
-            departmentLeader,
-            children,
-            ...data
-        }})
+        dispatch({
+            type: 'department/_addDepartment', payload: {
+                departmentLeader,
+                children,
+                ...data
+            }
+        })
 
         setDialogStatus(false);
     }
 
     // 新增子部门或者修改子部门
     const pushOrUpdateList = (data) => {
-        const childrenIds = data.list.map( item => item._id);
+        const childrenIds = data.list.map(item => item._id);
         setChildList(data.list);
-        form.setFieldsValue({children:childrenIds})
+        form.setFieldsValue({ children: childrenIds })
     }
 
     return (
-        <Form 
-            form={form} 
+        <Form
+            form={form}
             onFinish={_onFinish}
             initialValues={{
                 departmentName: departmentDetail?.departmentName,
@@ -87,17 +90,23 @@ const FormComponent = ({ modalType,setDialogStatus}) => {
                         />
                     </Form.Item>
                 </Descriptions.Item>
-            
+
+                { modalType === 'update' && (
+                    <Descriptions.Item label="部门员工">
+                        <StaffTable staffList={departmentDetail.staffList} />
+                    </Descriptions.Item>
+                ) }
+
             </Descriptions>
 
             {
-                    modalType === 'add' && (
-                        <Form.Item>
-                            <Row justify='end' >
-                                <Button className='mt-20' type='primary' htmlType='submit' >创建</Button>
-                            </Row>
-                        </Form.Item>
-                    )
+                modalType === 'add' && (
+                    <Form.Item>
+                        <Row justify='end' >
+                            <Button className='mt-20' type='primary' htmlType='submit' >创建</Button>
+                        </Row>
+                    </Form.Item>
+                )
             }
 
         </Form>

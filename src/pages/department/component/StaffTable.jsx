@@ -68,7 +68,7 @@ const StaffTable = ({ staffList }) => {
             dataSource={staffList}
             columns={columns}
             rowkey={record => record._id}
-            className={departm - staff - list - wrapper}
+            className="department-staff-list-wrapper"
             pagination={false}
             align="center"
             bordered
