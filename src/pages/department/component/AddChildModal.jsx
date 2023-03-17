@@ -15,8 +15,8 @@ const AddChildModal = ({
         return state.department.departmentList.filter((item) => {
             return (
                 item.parentLists[0] !== null &&
-                departmentDetail?._id !== item._id &&
-                !existsList.map((item) => item._id).includes(item._id)
+                departmentDetail?._id !== item?._id &&
+                !existsList.map((item) => item?._id).includes(item?._id)
             );
         });
     });
