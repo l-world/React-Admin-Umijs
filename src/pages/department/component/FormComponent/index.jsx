@@ -36,6 +36,27 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
         form.setFieldsValue({ children: childrenIds })
     }
 
+     //- 修改部门信息
+    const updateDepartment = ({type,updateVal,isDelete=false}) => {
+        if(!updateVal){
+            updateVal = form.getFieldValue(type);
+            // 判断新旧是否相等
+            if(updateVal === departmentDetail[type]) return;
+        }
+
+        dispatch(
+            {
+                type:'department/updateDepartmentDetail',
+                payload:{
+                    _id:departmentDetail._id,
+                    type,
+                    updateVal,
+                    isDelete
+                }
+            }
+        )
+    }
+
     return (
         <Form
             form={form}
@@ -51,13 +72,21 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
 
                 <Descriptions.Item label="部门名称" >
                     <Form.Item name="departmentName" rules={departmentRule.departmentName} >
-                        <Input onBlur={() => { }} />
+                        <Input onBlur={ () => { 
+                                modalType === 'update' &&
+                                updateDepartment({ type: 'departmentName' });
+                            }} 
+                        />
                     </Form.Item>
                 </Descriptions.Item>
 
                 <Descriptions.Item label="备注">
                     <Form.Item name="remark">
-                        <Input onBlur={() => { }} />
+                        <Input onBlur={ () => { 
+                                modalType === 'update' &&
+                                updateDepartment({ type: 'remark' });
+                            }}
+                        />
                     </Form.Item>
                 </Descriptions.Item>
 
@@ -84,6 +113,7 @@ const FormComponent = ({ modalType, setDialogStatus }) => {
                                             departmentLeaderName: item.userName,
                                             departmentLeader: item._id,
                                         });
+                                        modalType === 'update' && updateDepartment({ type: 'departmentLeader' });
                                     }}
                                 />
                             }

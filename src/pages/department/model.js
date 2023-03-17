@@ -49,5 +49,21 @@ export default {
                 payload: {},
             });
         },
+
+        // 修改部门信息
+        *updateDepartmentDetail( {payload}, { put, call }) {
+            const { code, msg } = yield call($http.updateDepartment,payload);
+            if(code) return;
+            message.success(msg);
+            yield put({
+                type:'_initDepartmentList',
+                payload:{},
+            })
+
+            yield put({
+                type:'_getDepartmentDetail',
+                payload:{ _id:payload._id }
+            })
+        }
     }
 }

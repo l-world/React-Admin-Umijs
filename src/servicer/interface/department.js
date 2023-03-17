@@ -13,3 +13,6 @@ export const getDepartmentDetail = (params) =>ajax.get(`/department/${params._id
 
 //- 新增部门
 export const addDepartment = (params) => ajax.post('/department', params);
+
+//- 修改部门
+export const updateDepartment = (params) => ajax.put(`/department/${params._id}`, params);
