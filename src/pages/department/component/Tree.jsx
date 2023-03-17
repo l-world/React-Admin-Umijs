@@ -21,20 +21,20 @@ const Tree = ({ getDepartmentDetail }) => {
     }, []);
 
     // 处理数据
-    const addProps = (list) => {
-        list.forEach(item => {
-            if(item.children && item.children.every( item => item === null)){
-                item.children = []
-            }
-            if (item) {
-                item.label = item.departmentName;
-                item.id = item._id;
-                (item.children && item.children.length) && addProps(item.children);
-            }
-        })
-    }
+    // const addProps = (list) => {
+    //     list.forEach(item => {
+    //         if(item.children && item.children.every( item => item === null)){
+    //             item.children = []
+    //         }
+    //         if (item) {
+    //             item.label = item.departmentName;
+    //             item.id = item._id;
+    //             (item.children && item.children.length) && addProps(item.children);
+    //         }
+    //     })
+    // }
 
-    addProps(departmentList);
+    // addProps(departmentList);
 
     const selectData = (e, data) => {
         getDepartmentDetail(data.id, data.departmentName);
