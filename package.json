@@ -6,7 +6,8 @@
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "test:coverage": "umi-test --coverage",
+    "analyze": "cross-env ANALYZE=1 umi build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -22,6 +23,7 @@
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
     "classnames": "^2.3.2",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",
